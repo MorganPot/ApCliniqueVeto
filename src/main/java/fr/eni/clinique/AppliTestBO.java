@@ -13,7 +13,7 @@ import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
 
 public class AppliTestBO {
-//test
+//teqt
 	public static void main(String[] args) {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(new java.util.Date());
