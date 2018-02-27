@@ -2,8 +2,8 @@ package fr.eni.clinique.bo;
 
 import java.util.List;
 
+import fr.eni.clinique.dal.dao.jdbc.ConnexionDAOJdbcImpl;
 import fr.eni.clinique.dal.exception.DaoException;
-import fr.eni.clinique.dal.jdbc.ConnexionDAOJdbcImpl;
 
 public class Client {
 	int CodeClient;
@@ -18,8 +18,6 @@ public class Client {
 	String Email;
 	String Remarque;
 	Boolean Archive;
-
-	ConnexionDAOJdbcImpl connex = new ConnexionDAOJdbcImpl();
 	
 	public Client(){
 		
@@ -114,11 +112,6 @@ public class Client {
 	}
 	public void setArchive(Boolean archive) {
 		Archive = archive;
-	}
-	
-	public List<Client> getlistClient() throws DaoException{		
-		List<Client> clients = connex.selectAll();
-		return clients;
 	}
 	
 	@Override

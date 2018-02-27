@@ -15,13 +15,13 @@ public class AppliTestDAL {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Client leClient = new Client();
-		
-		try {
-			System.out.println(leClient.getlistClient());
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			throw new TechnicalException("Erreur Technique", e);
-		}
+//		
+//		try {
+//			System.out.println(leClient.getlistClient());
+//		} catch (DaoException e) {
+//			// TODO Auto-generated catch block
+//			throw new TechnicalException("Erreur Technique", e);
+//		}
 	}
 
 }

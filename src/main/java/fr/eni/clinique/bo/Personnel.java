@@ -6,6 +6,9 @@ public class Personnel {
 	String MotPasse;
 	String Role;
 	Boolean Archive;
+	
+	public Personnel() {
+	}
 		
 	public Personnel(int codePers, String nom, String motPasse, String role, Boolean archive) {
 		super();
@@ -46,6 +49,9 @@ public class Personnel {
 	public void setArchive(Boolean archive) {
 		Archive = archive;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
