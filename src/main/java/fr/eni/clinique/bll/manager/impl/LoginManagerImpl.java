@@ -52,24 +52,4 @@ public class LoginManagerImpl implements LoginManager {
         
         return personnels;
 	}
-
-	@Override
-	public Boolean VerifLogin(String nom, String motPasse) throws LoginException {
-		
-		Boolean result = false;
-		
-		try {
-	        
-			for (Personnel personnel : this.getPerso()) {
-				if(personnel.getNom().equals(nom) && personnel.getMotPasse().equals(motPasse)){
-					result = true;
-				}
-			}
-            
-        } catch (LoginException e) {
-            throw new LoginException("Error getting Articles", e);
-        }
-		
-		return result;
-	} 
 }

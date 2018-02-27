@@ -10,6 +10,7 @@ public class AppConstants {
     public static final String EMPTY = "";
     public static final String SPACE = " ";
     public static final String APP_PROPERTIES_NAME = "application.properties";
+    public static final String APP_NAME = "Connexion";
     
     private AppConstants() {
         

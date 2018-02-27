@@ -5,25 +5,24 @@ import org.slf4j.LoggerFactory;
 
 import fr.eni.clinique.bll.exception.LoginException;
 import fr.eni.clinique.bll.factory.LoginFactory;
-import fr.eni.clinique.bll.manager.LoginManager;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.exception.TechnicalException;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class AppliTestBLL {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppliTestBLL.class);
-
-    private LoginManager loginManager = LoginFactory.catalogueManager();
-	
+    
 	public static void main(String[] args) throws LoginException {
 		// TODO Auto-generated method stub
+		ConnexionModel model = new ConnexionModel();
 		
 		try {
-			if(LoginFactory.catalogueManager().VerifLogin("Test", "test")){
+			if(model.verifLog("Test", "test")){
 				System.out.println("win");
 			}
 			else{
-				for (Personnel personnel : LoginFactory.catalogueManager().getPerso()) {
+				for (Personnel personnel : LoginFactory.loginManager().getPerso()) {
 					System.out.println(personnel.getNom());
 					System.out.println(personnel.getMotPasse());
 				}
