@@ -12,9 +12,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import fr.eni.clinique.ihm.InternalFrame1;
-
-
 public class MDIAppExample extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -22,7 +19,6 @@ public class MDIAppExample extends JFrame implements ActionListener {
 	private JDesktopPane desktopPane;
 	private JMenuBar menuBarre;
 	private JMenu menuAgenda;
-	private InternalFrame1 frm1;
 
 
 	public MDIAppExample() {
@@ -41,8 +37,6 @@ public class MDIAppExample extends JFrame implements ActionListener {
 		// Barre de menus
 		setJMenuBar(getMenuBarre());
 		
-		//Frame interne exemple		
-		desktopPane.add(getFrm1());
 
 	}
 
@@ -98,7 +92,6 @@ public class MDIAppExample extends JFrame implements ActionListener {
 
 		case "ecran":
 			System.out.println("coucou");
-			getFrm1().setVisible(true);
 			break;
 
 		default:
@@ -120,11 +113,5 @@ public class MDIAppExample extends JFrame implements ActionListener {
 		return menuBarre;
 	}
 
-	public InternalFrame1 getFrm1() {
-		if(frm1== null){
-			frm1 = new InternalFrame1();
-		}
-		return frm1;
-	}
 
 }
