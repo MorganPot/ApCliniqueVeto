@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm;
+package fr.eni.clinique.ihm.vueScreen;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -11,6 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+
+import fr.eni.clinique.ihm.InternalFrame1;
 
 
 public class MDIAppExample extends JFrame implements ActionListener {
