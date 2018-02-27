@@ -1,8 +1,6 @@
 package fr.eni.clinique.ihm.vueScreen;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,9 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.dao.jdbc.ConnexionDAOJdbcImpl;
-import fr.eni.clinique.dal.exception.DaoException;
+import fr.eni.clinique.ihm.listener.ConnexionActionListener;
 
 
 
@@ -27,12 +24,18 @@ public class ConnexionVue extends JInternalFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private ConnexionDAOJdbcImpl connexion = ConnexionDAOJdbcImpl.getInstance();
+    private ConnexionActionListener actionListener;
 	
-	public ConnexionVue() {
-		initialize();
-	}
-	
-	
+	public ConnexionVue(String title) {
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
+        setSize(600, 500); // Taille de la fenetre
+        setResizable(false); // Fenetre pas redimensionnable
+        setTitle(title); // Titre de la fenetre
+        
+        initialize(); // Construct Components.
+
+    }
 	
 	/**
 	 * Launch the application.

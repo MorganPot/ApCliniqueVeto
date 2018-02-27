@@ -16,7 +16,7 @@ public class LoginFactory {
      * 
      * @return
      */
-    public static LoginManager catalogueManager() {
+    public static LoginManager loginManager() {
         return LoginManagerImpl.getInstance();
     }
 }

@@ -8,6 +8,4 @@ import fr.eni.clinique.bo.Personnel;
 public interface LoginManager {
 	
 	 List<Personnel> getPerso() throws LoginException;
-	    
-	 Boolean VerifLogin(String nom, String motPasse) throws LoginException;
 }
