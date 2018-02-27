@@ -68,7 +68,7 @@ public class ConnexionDAOJdbcImpl implements ConnexionDao{
     	Personnel personnel = new Personnel();
         personnel.setCodePers(resultSet.getInt("CodePers"));
         personnel.setNom(resultSet.getString("Nom"));
-        personnel.setMotPasse(resultSet.getString("MotPass"));
+        personnel.setMotPasse(resultSet.getString("MotPasse"));
         personnel.setRole(resultSet.getString("Role"));
         personnel.setArchive(resultSet.getBoolean("Archive"));
         
