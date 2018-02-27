@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -22,7 +23,7 @@ public class ConnexionVue extends JInternalFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7833478608680411934L;
+	private static final long serialVersionUID = 6893577698630411035L;
 	public JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -39,7 +40,7 @@ public class ConnexionVue extends JInternalFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 325, 166);
+		frame.setBounds(200, 200, 400, 200);
 		frame.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
@@ -71,6 +72,10 @@ public class ConnexionVue extends JInternalFrame {
 		btnLogin.setBounds(111, 93, 115, 23);
 		frame.getContentPane().add(btnLogin);
 		
+		ImageIcon icone = new ImageIcon("images/fond_frame.jpg");
+		frame.setIconImage(new ImageIcon("images/fond_frame.jpg").getImage());
+        frame.setSize(200,200);
+        frame.setVisible(true);
 		
 		
 	}
