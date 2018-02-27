@@ -58,11 +58,17 @@ public class LoginManagerImpl implements LoginManager {
 		
 		Boolean result = false;
 		
-		for (Personnel personnel : this.getPerso()) {
-			if(personnel.getNom() == nom && personnel.getMotPasse() == motPasse){
-				result = true;
+		try {
+	        
+			for (Personnel personnel : this.getPerso()) {
+				if(personnel.getNom().equals(nom) && personnel.getMotPasse().equals(motPasse)){
+					result = true;
+				}
 			}
-		}
+            
+        } catch (LoginException e) {
+            throw new LoginException("Error getting Articles", e);
+        }
 		
 		return result;
 	} 
