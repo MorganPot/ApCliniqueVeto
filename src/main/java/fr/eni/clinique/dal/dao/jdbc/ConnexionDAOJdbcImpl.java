@@ -56,7 +56,7 @@ public class ConnexionDAOJdbcImpl implements ConnexionDao{
             }
             
         } catch (SQLException e) {
-            throw new DaoException("Erreur d'execution de la requete SELECT ALL Clients", e);
+            throw new DaoException("Erreur d'execution de la requete SELECT ALL Personnel", e);
         } finally {
             ResourceUtil.safeClose(connection, statement, resultSet);
         }
