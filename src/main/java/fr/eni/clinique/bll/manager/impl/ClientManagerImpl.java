@@ -18,7 +18,7 @@ private static ClientManagerImpl SINGLETON;
     /**
      * Get Article DAO.
      */
-    private ClientDao clientDao = DaoFactory.articleDao();
+    private ClientDao clientDao = DaoFactory.clientDao();
     
     /**
      * Private constructor to forbid external instanciation.
