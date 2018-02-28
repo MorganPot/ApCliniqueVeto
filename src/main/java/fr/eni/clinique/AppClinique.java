@@ -18,8 +18,9 @@ public class AppClinique {
                     ConnexionController controller = new ConnexionController(model);
 					
 					ConnexionVue ecran = new ConnexionVue(AppConstants.APP_NAME);
-					
-					ecran.frame.setVisible(true);
+					ecran.setVisible(true);
+					ecran.setLocationRelativeTo(null); // Centré sur l'ecran
+                    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}	
