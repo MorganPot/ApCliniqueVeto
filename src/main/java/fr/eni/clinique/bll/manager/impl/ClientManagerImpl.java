@@ -5,6 +5,11 @@ import java.util.List;
 import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.manager.ClientManager;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.common.exception.TechnicalException;
+import fr.eni.clinique.common.util.ObjectUtil;
+import fr.eni.clinique.dal.dao.ClientDao;
+import fr.eni.clinique.dal.exception.DaoException;
+import fr.eni.clinique.dal.factory.DaoFactory;
 
 public class ClientManagerImpl implements ClientManager{
 
@@ -28,7 +33,7 @@ private static ClientManagerImpl SINGLETON;
      */
     public static ClientManagerImpl getInstance() {
         if(SINGLETON == null) {
-            SINGLETON = new CatalogueClientManagerImplManagerImpl();
+            SINGLETON = new ClientManagerImpl();
         }
         return SINGLETON;
     }
@@ -39,18 +44,18 @@ private static ClientManagerImpl SINGLETON;
      * Catch Dao Exception to throw ManagerException.
      */
     @Override
-    public List<Personnel> getCatalogue() throws ManagerException {
+    public List<Client> getClient() throws ManagerException {
         
-        List<Personnel> articles = null;
+        List<Client> clients = null;
         
         try {
-            articles = articleDAO.selectAll();
+        	clients = clientDao.selectAll();
             
         } catch (DaoException e) {
-            throw new ManagerException("Error getting Articles", e);
+            throw new ManagerException("Error getting Clients", e);
         }
         
-        return articles;
+        return clients;
     }
     
     /**
@@ -58,16 +63,16 @@ private static ClientManagerImpl SINGLETON;
      * Catch Dao Exception to throw ManagerException.
      */
     @Override
-    public void removeArticle(Personnel article) throws ManagerException {
+    public void removeClient(Client client) throws ManagerException {
         
-        ObjectUtil.checkNotNull(article);
-        ObjectUtil.checkNotNull(article.getIdArticle());
+        ObjectUtil.checkNotNull(client);
+        ObjectUtil.checkNotNull(client.getCodeClient());
         
         try {
-            articleDAO.delete(article.getIdArticle());
+            clientDao.delete(client.getCodeClient());
             
         } catch (DaoException e) {
-            throw new ManagerException("Error inserting", e);
+            throw new ManagerException("Error deleting", e);
         }
     }
    
@@ -77,23 +82,21 @@ private static ClientManagerImpl SINGLETON;
      * @param article
      * @throws ManagerException
      */
-    private void validerArticle(Personnel article) throws ManagerException {
+    private void validerClient(Client client) throws ManagerException {
         
         try {
-            ObjectUtil.checkNotNull(article);
-            ObjectUtil.checkNotBlank(article.getReference());
-            ObjectUtil.checkNotBlank(article.getMarque());
-            ObjectUtil.checkNotBlank(article.getDesignation());
-            ObjectUtil.checkNotNull(article.getPrixUnitaire());
-            ObjectUtil.checkNotNull(article.getQteStock());
+            ObjectUtil.checkNotNull(client);
+            ObjectUtil.checkNotBlank(client.getNomClient());
+            ObjectUtil.checkNotBlank(client.getPrenomClient());
+            ObjectUtil.checkNotBlank(client.getAdresse1());
+            ObjectUtil.checkNotNull(client.getAdresse2());
+            ObjectUtil.checkNotNull(client.getCodePostal());
+            ObjectUtil.checkNotNull(client.getVille());
+            ObjectUtil.checkNotNull(client.getNumTel());
+            ObjectUtil.checkNotNull(client.getAssurance());
+            ObjectUtil.checkNotNull(client.getEmail());
+            ObjectUtil.checkNotNull(client.getArchive());
             
-            if(article instanceof Ramette) {
-                if(((Ramette) article).getGrammage() == 0) {
-                    throw new IllegalArgumentException("Le grammage doit etre strictement positif");
-                }
-            } else if(article instanceof Stylo) {
-                ObjectUtil.checkNotBlank(((Stylo)article).getCouleur());
-            }
         } catch (IllegalArgumentException e) { // Business Erreur remontée à l'utilisateur
             throw new ManagerException("Un des champs requis n'est pas valorisé !", e); 
         } catch(Exception e) { // Erreur technique suite à un pb lié au code.
@@ -107,21 +110,21 @@ private static ClientManagerImpl SINGLETON;
      * Catch Dao Exception to throw ManagerException.
      */
     @Override
-    public Personnel addArticle(Personnel newArticle) throws ManagerException {
+    public Client addClient(Client newClient) throws ManagerException {
         
-        ObjectUtil.checkNotNull(newArticle);
+        ObjectUtil.checkNotNull(newClient);
         
-        Personnel article = null;
+        Client client = null;
         try {
             
-            validerArticle(newArticle);
+            validerClient(newClient);
             
-            article = articleDAO.insert(newArticle);
+            client = clientDao.insert(newClient);
             
         } catch (DaoException e) {
             throw new ManagerException("Error inserting", e);
         }
-        return article;
+        return client;
     }
 
     /**
@@ -130,17 +133,17 @@ private static ClientManagerImpl SINGLETON;
      * Catch Dao Exception to throw ManagerException.
      */
     @Override
-    public void updateArticle(Personnel article) throws ManagerException {
+    public void updateClient(Client client) throws ManagerException {
         
-        ObjectUtil.checkNotNull(article);
+        ObjectUtil.checkNotNull(client);
         try {
 
-            validerArticle(article);
+            validerClient(client);
             
-            articleDAO.update(article);
+            clientDao.update(client);
             
         } catch (DaoException e) {
-            throw new ManagerException("Error inserting", e);
+            throw new ManagerException("Error updating", e);
         }
     }    
 }
