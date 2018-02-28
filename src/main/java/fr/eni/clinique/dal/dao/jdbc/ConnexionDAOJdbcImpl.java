@@ -18,6 +18,7 @@ public class ConnexionDAOJdbcImpl implements ConnexionDao{
     private final static String SELECT_ALL_QUERY = "SELECT CodePers, Nom, MotPasse, Role,"
     												+ " Archive FROM Personnels";
     
+    
     private static ConnexionDAOJdbcImpl SINGLETON = null;
     
     private ConnexionDAOJdbcImpl() {
