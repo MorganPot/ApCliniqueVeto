@@ -24,7 +24,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
 													+ " Archive FROM Personnels WHERE CodePers = ?";
     private final static String INSERT_QUERY = "INSERT INTO Personnels(Nom, MotPasse, Role, Archive) "
     											+ "VALUES (?, ?, ?, ?);";
-    private final static String UPDATE_QUERY = "UPDATE eleves SET Nom = ?, MotPasse = ?, Role = ?, "
+    private final static String UPDATE_QUERY = "UPDATE Personnels SET Nom = ?, MotPasse = ?, Role = ?, "
     											+ "Archive = ? WHERE CodePers = ?;";
     private static final String DELETE_QUERY = "DELETE FROM Personnels WHERE CodePers=?";
     
@@ -66,7 +66,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
             }
             
         } catch (SQLException e) {
-            throw new DaoException("Erreur d'execution de la requete SELECT ALL Clients", e);
+            throw new DaoException("Erreur d'execution de la requete SELECT ALL Personnels", e);
         } finally {
             ResourceUtil.safeClose(connection, statement, resultSet);
         }
@@ -196,7 +196,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
             }
             
         } catch (SQLException e) {
-            throw new DaoException("Erreur d'execution de la requete select 1 membres du personnel", e);
+            throw new DaoException("Erreur d'execution de la requete select 1 membre du personnel", e);
         } finally {
             ResourceUtil.safeClose(connection, statement, resultSet);
         }

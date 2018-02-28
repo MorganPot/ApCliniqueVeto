@@ -47,7 +47,7 @@ public class LoginManagerImpl implements LoginManager {
             personnels = connexionDao.selectAll();
             
         } catch (DaoException e) {
-            throw new ManagerException("Error getting Articles", e);
+            throw new ManagerException("Error getting Personnels", e);
         }
         
         return personnels;
