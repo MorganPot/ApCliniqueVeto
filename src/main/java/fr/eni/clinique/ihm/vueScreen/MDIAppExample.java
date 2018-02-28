@@ -12,10 +12,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5f7de074545b2736345a41ad026349a870eb971b
 public class MDIAppExample extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -41,10 +37,9 @@ public class MDIAppExample extends JFrame implements ActionListener {
 		// Barre de menus
 		setJMenuBar(getMenuBarre());
 		
-<<<<<<< HEAD
+
 		//Frame interne exemple		
-=======
->>>>>>> 5f7de074545b2736345a41ad026349a870eb971b
+
 
 	}
 
@@ -121,8 +116,5 @@ public class MDIAppExample extends JFrame implements ActionListener {
 		return menuBarre;
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5f7de074545b2736345a41ad026349a870eb971b
 }
