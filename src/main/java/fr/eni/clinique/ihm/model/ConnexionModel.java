@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import fr.eni.clinique.bll.exception.LoginException;
-import fr.eni.clinique.bll.factory.LoginFactory;
+import fr.eni.clinique.bll.exception.ManagerException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginManager;
 import fr.eni.clinique.bo.Personnel;
 
@@ -13,9 +13,9 @@ public class ConnexionModel extends Observable{
 
     private List<Personnel> personnels = new ArrayList<>();
 
-    private LoginManager loginManager = LoginFactory.loginManager();
+    private LoginManager loginManager = ManagerFactory.loginManager();
 	
-    public Boolean verifLog(String nom, String motPasse) throws LoginException {
+    public Boolean verifLog(String nom, String motPasse) throws ManagerException {
     	
 		Boolean result = false;
 		
@@ -27,8 +27,8 @@ public class ConnexionModel extends Observable{
 				}
 			}
             
-        } catch (LoginException e) {
-            throw new LoginException("Error getting Articles", e);
+        } catch (ManagerException e) {
+            throw new ManagerException("Error getting Articles", e);
         }
 		
 		return result;

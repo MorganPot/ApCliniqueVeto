@@ -1,6 +1,6 @@
 package fr.eni.clinique.bll.exception;
 
-public class LoginException extends Exception {
+public class ManagerException extends Exception {
 
     /**
      * 
@@ -11,14 +11,14 @@ public class LoginException extends Exception {
      * @param message
      * @param cause
      */
-    public LoginException(String message, Throwable cause) {
+    public ManagerException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
      * @param message
      */
-    public LoginException(String message) {
+    public ManagerException(String message) {
         super(message);
     }
 

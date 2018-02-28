@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.controller;
 
-import fr.eni.clinique.bll.factory.LoginFactory;
+import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginManager;
 import fr.eni.clinique.ihm.listener.ConnexionActionListener;
 import fr.eni.clinique.ihm.model.ConnexionModel;
@@ -8,7 +8,7 @@ import fr.eni.clinique.ihm.model.ConnexionModel;
 public class ConnexionController implements ConnexionActionListener{
 
     private ConnexionModel model;
-    private LoginManager catalogueManager = LoginFactory.loginManager();
+    private LoginManager catalogueManager = ManagerFactory.loginManager();
 
     /**
      * @param model

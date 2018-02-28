@@ -2,7 +2,7 @@ package fr.eni.clinique.bll.manager.impl;
 
 import java.util.List;
 
-import fr.eni.clinique.bll.exception.LoginException;
+import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.manager.LoginManager;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.exception.TechnicalException;
@@ -39,7 +39,7 @@ public class LoginManagerImpl implements LoginManager {
     }
 
 	@Override
-	public List<Personnel> getPerso() throws LoginException {
+	public List<Personnel> getPerso() throws ManagerException {
     	
     	List<Personnel> personnels = null;
         
@@ -47,7 +47,7 @@ public class LoginManagerImpl implements LoginManager {
             personnels = connexionDao.selectAll();
             
         } catch (DaoException e) {
-            throw new LoginException("Error getting Articles", e);
+            throw new ManagerException("Error getting Articles", e);
         }
         
         return personnels;

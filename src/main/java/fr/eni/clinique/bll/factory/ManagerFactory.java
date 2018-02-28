@@ -9,7 +9,7 @@ import fr.eni.clinique.bll.manager.impl.LoginManagerImpl;
  * @author externe
  *
  */
-public class LoginFactory {
+public class ManagerFactory {
    
     /**
      * Get catalogue Manager.
