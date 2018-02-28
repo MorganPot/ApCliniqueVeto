@@ -15,7 +15,7 @@ public GestionPersonnelModel(){
 		
 	}
 	
-	public void RéinitialiserPersonnel(int codePers){
+	public void Rï¿½initialiserPersonnel(int codePers){
 		
 	}
 }
