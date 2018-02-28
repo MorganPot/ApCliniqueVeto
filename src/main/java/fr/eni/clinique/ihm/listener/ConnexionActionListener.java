@@ -2,6 +2,6 @@ package fr.eni.clinique.ihm.listener;
 
 public interface ConnexionActionListener {
 
-	void verifLog(String nom, String motPasse) throws Exception;
+	Boolean verifLog(String nom, String motPasse) throws Exception;
 	
 }

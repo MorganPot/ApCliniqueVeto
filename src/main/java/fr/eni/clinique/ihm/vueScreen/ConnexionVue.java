@@ -21,7 +21,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import fr.eni.clinique.dal.dao.jdbc.ConnexionDAOJdbcImpl;
+import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.listener.ConnexionActionListener;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 
 
@@ -34,12 +36,15 @@ public class ConnexionVue extends JFrame {
 	
 	private ConnexionDAOJdbcImpl connexion = ConnexionDAOJdbcImpl.getInstance();
     private ConnexionActionListener actionListener;
+	private ConnexionModel model = new ConnexionModel();
+	private ConnexionController controller = new ConnexionController(model);
+	
     
 	public 	JPanel panel;
 	private JLabel lblNom;
 	private JTextField textField;
 	private JLabel lblPassword;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	
 	private JButton btnLogin;
 	
@@ -81,7 +86,7 @@ public class ConnexionVue extends JFrame {
         textField = createTextField(null, "Entrez le nom");
         
         lblPassword = createLabel("Password");
-        passwordField = createTextField(null, "Entrez le mot de passe");
+        passwordField = createPasswordField(null, "Entrez le mot de passe");
      
         GridBagConstraints gridBagConstraints = createGridBagConstraints();
         
@@ -128,9 +133,8 @@ public class ConnexionVue extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (actionListener != null) {
+                if (controller != null) {
                 	verifLog();
-                	showSuccessMessage("Reussi");
                 }
             }
         });
@@ -143,12 +147,16 @@ public class ConnexionVue extends JFrame {
     private void verifLog() {
 
         try {
-            if (lblNom.equals(null) || lblPassword.equals(null)) {
+            if (textField.getText().trim().equals("") || passwordField.getText().trim().equals("")) {
                 // showArticle(model.lastArticle());
-                showFailureMessage("Raté");
+                showFailureMessage("Login/Password incorrect !!");
             } else {
-                actionListener.verifLog(lblNom.toString(), lblPassword.toString());
-
+                if(controller.verifLog(textField.getText().trim(), passwordField.getText().trim())){
+                	showSuccessMessage("Connexion réussi");
+                }
+                else {
+                    showFailureMessage("Login/Password incorrect !!");
+                }
                 // showArticle(model.currentArticle());
             }
         } catch (Exception e) {
@@ -181,6 +189,13 @@ public class ConnexionVue extends JFrame {
         textField.setFont(defaultFont);
         textField.setToolTipText(tooltip);
         return textField;
+    }
+    
+    private JPasswordField createPasswordField(String text, String tooltip) {
+
+        JPasswordField password = new JPasswordField(text);
+        password.setToolTipText(tooltip);
+        return password;
     }
 
     public void removeActionListener() {

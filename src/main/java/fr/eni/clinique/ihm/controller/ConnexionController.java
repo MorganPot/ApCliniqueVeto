@@ -19,8 +19,7 @@ public class ConnexionController implements ConnexionActionListener{
     }
 
 	@Override
-	public void verifLog(String nom, String motPasse) throws Exception {
-		// TODO Auto-generated method stub
-		model.verifLog(nom, motPasse);
+	public Boolean verifLog(String nom, String motPasse) throws Exception {
+		return model.verifLog(nom, motPasse);
 	}
 }
