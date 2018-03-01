@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class AjouterPersonnelsVue extends JFrame {
 
@@ -51,7 +52,7 @@ public class AjouterPersonnelsVue extends JFrame {
 		lblNom.setBounds(44, 36, 58, 23);
 		contentPane.add(lblNom);
 		textFieldNom = new JTextField();
-		textFieldNom.setBounds(132, 37, 86, 20);
+		textFieldNom.setBounds(109, 37, 109, 20);
 		contentPane.add(textFieldNom);
 		textFieldNom.setColumns(10);
 		
@@ -60,7 +61,7 @@ public class AjouterPersonnelsVue extends JFrame {
 		lblPrenom.setBounds(43, 70, 46, 14);
 		contentPane.add(lblPrenom);
 		textFieldPrenom = new JTextField();
-		textFieldPrenom.setBounds(132, 67, 86, 20);
+		textFieldPrenom.setBounds(109, 67, 109, 20);
 		contentPane.add(textFieldPrenom);
 		textFieldPrenom.setColumns(10);
 		
@@ -70,7 +71,7 @@ public class AjouterPersonnelsVue extends JFrame {
 		contentPane.add(lblFonction);
 		textFieldFonction = new JTextField();
 		textFieldFonction.setColumns(10);
-		textFieldFonction.setBounds(132, 98, 86, 20);
+		textFieldFonction.setBounds(109, 98, 109, 20);
 		contentPane.add(textFieldFonction);
 		
 		
@@ -80,17 +81,18 @@ public class AjouterPersonnelsVue extends JFrame {
 		contentPane.add(labelPassword);
 		textFieldPassword = new JTextField();
 		textFieldPassword.setColumns(10);
-		textFieldPassword.setBounds(132, 129, 86, 20);
+		textFieldPassword.setBounds(109, 129, 109, 20);
 		contentPane.add(textFieldPassword);
 		
 		
 		
-		JButton btnAjouter = new JButton("Ajouter");
+		JButton btnAjouter = new JButton("");
+		btnAjouter.setIcon(new ImageIcon(AjouterPersonnelsVue.class.getResource("/image/tick.png")));
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAjouter.setBounds(91, 186, 89, 23);
+		btnAjouter.setBounds(91, 184, 89, 33);
 		contentPane.add(btnAjouter);
 	}
 
