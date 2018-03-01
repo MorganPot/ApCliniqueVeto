@@ -168,6 +168,7 @@ public class ClientDAOJdbcImpl implements ClientDao{
             statement.setString(9, element.getEmail());
             statement.setString(10, element.getRemarque());
             statement.setBoolean(11, element.getArchive());
+            statement.setInt(1, element.getCodeClient());
             
             statement.executeUpdate();
             

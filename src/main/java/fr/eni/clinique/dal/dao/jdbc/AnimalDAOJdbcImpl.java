@@ -159,6 +159,7 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
             statement.setString(7, element.getTatouage());
             statement.setString(8, element.getAntecedents());
             statement.setBoolean(9, element.getArchive());
+            statement.setInt(10, element.getCodeAnimal());
             
             statement.executeUpdate();
             
