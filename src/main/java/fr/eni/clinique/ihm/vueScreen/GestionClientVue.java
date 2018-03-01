@@ -39,6 +39,8 @@ public class GestionClientVue extends JFrame {
 				try {
 					GestionClientVue frame = new GestionClientVue();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,7 +52,7 @@ public class GestionClientVue extends JFrame {
 	 * Create the frame.
 	 */
 	public GestionClientVue() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 745, 487);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,6 +79,8 @@ public class GestionClientVue extends JFrame {
 				try {
 					AjouterClientVue ajouterClientVue = new AjouterClientVue();
 					ajouterClientVue.setVisible(true);
+					ajouterClientVue.setResizable(false);
+					ajouterClientVue.setLocationRelativeTo(null);
 				
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -126,15 +130,15 @@ public class GestionClientVue extends JFrame {
 		contentPane.add(lblPrenom);
 		
 		JLabel lblAdresse = new JLabel("Adresse");
-		lblAdresse.setBounds(32, 265, 62, 14);
+		lblAdresse.setBounds(32, 284, 62, 14);
 		contentPane.add(lblAdresse);
 		
 		JLabel lblCodePostal = new JLabel("Code Postal");
-		lblCodePostal.setBounds(32, 331, 79, 14);
+		lblCodePostal.setBounds(32, 351, 79, 14);
 		contentPane.add(lblCodePostal);
 		
 		JLabel lblVille = new JLabel("Ville");
-		lblVille.setBounds(32, 367, 46, 14);
+		lblVille.setBounds(32, 387, 46, 14);
 		contentPane.add(lblVille);
 		
 		textFieldCode = new JTextField();
@@ -153,22 +157,22 @@ public class GestionClientVue extends JFrame {
 		textFieldPrenom.setColumns(10);
 		
 		textFieldAdresse = new JTextField();
-		textFieldAdresse.setBounds(121, 262, 178, 20);
+		textFieldAdresse.setBounds(121, 281, 178, 20);
 		contentPane.add(textFieldAdresse);
 		textFieldAdresse.setColumns(10);
 		
 		textFieldCodePostal = new JTextField();
-		textFieldCodePostal.setBounds(121, 328, 178, 20);
+		textFieldCodePostal.setBounds(121, 348, 178, 20);
 		contentPane.add(textFieldCodePostal);
 		textFieldCodePostal.setColumns(10);
 		
 		textFieldVille = new JTextField();
-		textFieldVille.setBounds(121, 364, 178, 20);
+		textFieldVille.setBounds(121, 384, 178, 20);
 		contentPane.add(textFieldVille);
 		textFieldVille.setColumns(10);
 		
 		textFieldAdresse2 = new JTextField();
-		textFieldAdresse2.setBounds(121, 284, 178, 20);
+		textFieldAdresse2.setBounds(121, 312, 178, 20);
 		contentPane.add(textFieldAdresse2);
 		textFieldAdresse2.setColumns(10);
 		
@@ -191,17 +195,17 @@ public class GestionClientVue extends JFrame {
 		
 		JButton btnAjouterAnimal = new JButton("");
 		btnAjouterAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/add-button.png")));
-		btnAjouterAnimal.setBounds(507, 364, 23, 23);
+		btnAjouterAnimal.setBounds(494, 367, 23, 23);
 		contentPane.add(btnAjouterAnimal);
 		
 		JButton btnSupprimerAnimal = new JButton("");
 		btnSupprimerAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/open-trash-can.png")));
-		btnSupprimerAnimal.setBounds(540, 363, 23, 23);
+		btnSupprimerAnimal.setBounds(543, 367, 23, 23);
 		contentPane.add(btnSupprimerAnimal);
 		
 		JButton btnEditerAnimal = new JButton("");
 		btnEditerAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/election-checklist-symbol.png")));
-		btnEditerAnimal.setBounds(573, 363, 23, 23);
+		btnEditerAnimal.setBounds(589, 367, 23, 23);
 		contentPane.add(btnEditerAnimal);
 	}
 }

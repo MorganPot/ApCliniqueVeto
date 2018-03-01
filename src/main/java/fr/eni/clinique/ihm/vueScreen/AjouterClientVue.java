@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AjouterClientVue extends JFrame {
 
@@ -63,6 +65,16 @@ public class AjouterClientVue extends JFrame {
 		panel.add(btnValider);
 		
 		JButton btnAnnuler = new JButton("");
+		btnAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+			}
+		});
 		btnAnnuler.setIcon(new ImageIcon(AjouterClientVue.class.getResource("/image/cancel.png")));
 		btnAnnuler.setBounds(227, 11, 160, 40);
 		panel.add(btnAnnuler);
