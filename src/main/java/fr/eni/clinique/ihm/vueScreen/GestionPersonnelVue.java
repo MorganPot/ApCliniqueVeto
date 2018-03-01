@@ -82,7 +82,7 @@ public class GestionPersonnelVue extends JFrame {
 		btnSupprimer.setBounds(167, 11, 89, 23);
 		frame.getContentPane().add(btnSupprimer);
 		
-		JButton btnReset = new JButton("Réinitialiser");
+		JButton btnReset = new JButton("Reinitialiser");
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
