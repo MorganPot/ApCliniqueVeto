@@ -104,6 +104,36 @@ public class GestionPersonnelVue extends JFrame {
 				}
 			}
 		});
+<<<<<<< HEAD
+=======
+		btnAjouter.setBounds(41, 11, 89, 23);
+		frame.getContentPane().add(btnAjouter);
+		
+		JButton btnSupprimer = new JButton("Supprimer");
+		btnSupprimer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSupprimer.setBounds(167, 11, 89, 23);
+		frame.getContentPane().add(btnSupprimer);
+		
+		JButton btnReset = new JButton("Reinitialiser");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnReset.setBounds(300, 11, 89, 23);
+		frame.getContentPane().add(btnReset);
+		
+		table = new JTable();
+		table.setForeground(Color.WHITE);
+		table.setColumnSelectionAllowed(true);
+		table.setBackground(Color.GRAY);
+		table.setBorder(UIManager.getBorder("Button.border"));
+		table.setBounds(41, 336, 498, -247);
+		frame.getContentPane().add(table);
+>>>>>>> 5c8c74dd971201ab53e8f922744a475f110eac50
 		
 		
 		
