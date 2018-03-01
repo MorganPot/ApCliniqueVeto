@@ -16,7 +16,7 @@ public class AnimalManagerImpl implements AnimalManager{
 
 private static AnimalManagerImpl SINGLETON;
     
-    private AnimalDao animalDao = DaoFactory.animalDao()();
+    private AnimalDao animalDao = DaoFactory.animalDao();
     
     /**
      * Private constructor to forbid external instanciation.
