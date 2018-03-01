@@ -80,7 +80,7 @@ public class GestionPersonnelVue extends JFrame {
 		btnSupprimer.setBounds(159, 30, 89, 23);
 		panel.add(btnSupprimer);
 		
-		JButton btnReset = new JButton("Réinitialiser");
+		JButton btnReset = new JButton("Rï¿½initialiser");
 		btnReset.setBounds(311, 30, 89, 23);
 		panel.add(btnReset);
 		btnReset.addActionListener(new ActionListener() {
@@ -104,8 +104,6 @@ public class GestionPersonnelVue extends JFrame {
 				}
 			}
 		});
-<<<<<<< HEAD
-=======
 		btnAjouter.setBounds(41, 11, 89, 23);
 		frame.getContentPane().add(btnAjouter);
 		
@@ -133,7 +131,6 @@ public class GestionPersonnelVue extends JFrame {
 		table.setBorder(UIManager.getBorder("Button.border"));
 		table.setBounds(41, 336, 498, -247);
 		frame.getContentPane().add(table);
->>>>>>> 5c8c74dd971201ab53e8f922744a475f110eac50
 		
 		
 		
