@@ -80,7 +80,7 @@ public class GestionPersonnelVue extends JFrame {
 		btnSupprimer.setBounds(159, 30, 89, 23);
 		panel.add(btnSupprimer);
 		
-		JButton btnReset = new JButton("R�initialiser");
+		JButton btnReset = new JButton("Reinitialiser");
 		btnReset.setBounds(311, 30, 89, 23);
 		panel.add(btnReset);
 		btnReset.addActionListener(new ActionListener() {
@@ -107,22 +107,7 @@ public class GestionPersonnelVue extends JFrame {
 		btnAjouter.setBounds(41, 11, 89, 23);
 		frame.getContentPane().add(btnAjouter);
 		
-		JButton btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSupprimer.setBounds(167, 11, 89, 23);
-		frame.getContentPane().add(btnSupprimer);
 		
-		JButton btnReset = new JButton("Reinitialiser");
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnReset.setBounds(300, 11, 89, 23);
-		frame.getContentPane().add(btnReset);
 		
 		table = new JTable();
 		table.setForeground(Color.WHITE);
