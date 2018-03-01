@@ -26,7 +26,7 @@ public class ClientDAOJdbcImpl implements ClientDao{
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive FROM Clients "
 													+ "WHERE CodeClient = ?;";
-    private final static String INSERT_QUERY = "INSERT INTO Personnels(NomClient, PrenomClient, Adresse1, "
+    private final static String INSERT_QUERY = "INSERT INTO Clients(NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive) "
 													+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";

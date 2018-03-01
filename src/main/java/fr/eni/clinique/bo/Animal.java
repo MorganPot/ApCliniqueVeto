@@ -27,6 +27,10 @@ public class Animal {
 		Archive = archive;
 	}
 	
+	public Animal() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getCodeAnimal() {
 		return CodeAnimal;
 	}

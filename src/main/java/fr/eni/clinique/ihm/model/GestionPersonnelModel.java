@@ -22,7 +22,7 @@ public class GestionPersonnelModel extends Observable{
         lesPersonnels.add(personnel);
     }
 	
-	public void R�initialiserPersonnel(int codePers){
+	public void RéinitialiserPersonnel(int codePers){
 		
 	}
 }
