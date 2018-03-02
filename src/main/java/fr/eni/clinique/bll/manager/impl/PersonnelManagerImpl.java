@@ -79,9 +79,9 @@ public class PersonnelManagerImpl implements PersonnelManager  {
             ObjectUtil.checkNotBlank(personnel.getMotPasse());
             ObjectUtil.checkNotBlank(personnel.getRole());
             
-        } catch (IllegalArgumentException e) { // Business Erreur remontant à  l'utilisateur
-            throw new ManagerException("Un des champs requis n'est pas valorisé !", e); 
-        } catch(Exception e) { // Erreur technique suite à  un pb lié au code.
+        } catch (IllegalArgumentException e) { // Business Erreur remontant ï¿½ l'utilisateur
+            throw new ManagerException("Un des champs requis n'est pas valorisï¿½ !", e); 
+        } catch(Exception e) { // Erreur technique suite ï¿½ un pb liï¿½ au code.
             throw new TechnicalException("Erreur Technique", e);
         }
     }
@@ -121,12 +121,5 @@ public class PersonnelManagerImpl implements PersonnelManager  {
         } catch (DaoException e) {
             throw new ManagerException("Error inserting", e);
         }
-    }
-
-	@Override
-	public List<Personnel> getCatalogue() throws ManagerException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+    }	
 }

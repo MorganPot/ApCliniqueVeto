@@ -17,7 +17,7 @@ public interface PersonnelManager {
      * @return
      * @throws ManagerException
      */
-    List<Personnel> getCatalogue() throws ManagerException;
+    List<Personnel> getPersonnel() throws ManagerException;
     
     /**
      * 

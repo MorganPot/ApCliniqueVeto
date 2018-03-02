@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import fr.eni.clinique.bll.exception.ManagerException;
+import fr.eni.clinique.bll.manager.PersonnelManager;
+import fr.eni.clinique.bll.manager.impl.PersonnelManagerImpl;
 import fr.eni.clinique.bo.Personnel;
 
 public class GestionPersonnelModel extends AbstractTableModel{
@@ -13,11 +16,17 @@ public class GestionPersonnelModel extends AbstractTableModel{
 	
 	private List<Personnel> lesPersonnels = new ArrayList<>();
 	
+	PersonnelManager perso = PersonnelManagerImpl.getInstance();
+	
 	private final String[] entetes = {"Nom", "Password", "Role"};
 	
-	public void ReinitialiserPersonnel(int codePers){
-		
-	}
+	public GestionPersonnelModel() throws ManagerException {
+        super();
+ 
+        for (Personnel personnel : perso.getPersonnel()) {
+			lesPersonnels.add(personnel);
+		}
+    }
 
 	@Override
 	public int getColumnCount() {

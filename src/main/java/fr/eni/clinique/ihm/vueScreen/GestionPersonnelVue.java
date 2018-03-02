@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -112,7 +114,7 @@ public class GestionPersonnelVue extends JFrame {
 		});
 		btnAjouter.setBounds(41, 11, 89, 23);
 		frame.getContentPane().add(btnAjouter);
-		
+		frame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 		
 		
 		table = new JTable();
