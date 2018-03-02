@@ -7,6 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.common.AppConstants;
+import fr.eni.clinique.ihm.model.GestionPersonnelModel;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,9 +18,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 
 public class GestionPersonnelVue extends JFrame {
-
+	
+	private static final long serialVersionUID = -773311085041102251L;
+	
 	private JPanel contentPane;
-	private JTable table;
+	private static JTable table;
+	private GestionPersonnelModel modelPersonnel;
 
 	/**
 	 * Launch the application.
@@ -58,6 +65,16 @@ public class GestionPersonnelVue extends JFrame {
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setBounds(139, 28, 96, 23);
 		panel.add(btnSupprimer);
+		btnSupprimer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+	            int[] selection = table.getSelectedRows();
+	 
+	            for(int i = selection.length - 1; i >= 0; i--){
+	                modelPersonnel.removePersonnel(selection[i]);
+	            }
+			}
+		});
 		
 		JButton btnReinitialiser = new JButton("Reinitialiser");
 		btnReinitialiser.addActionListener(new ActionListener() {
@@ -72,4 +89,10 @@ public class GestionPersonnelVue extends JFrame {
 		contentPane.add(table);
 	}
 
+	private void loadTableScreen() {
+		TableauScreen tableau = new TableauScreen(AppConstants.APP_NAME, modelPersonnel);
+		
+		tableau.setVisible(true);
+		tableau.setLocationRelativeTo(null);
+	}
 }
