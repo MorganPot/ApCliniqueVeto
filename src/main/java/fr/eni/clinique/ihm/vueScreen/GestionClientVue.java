@@ -68,6 +68,10 @@ public class GestionClientVue extends JFrame {
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				RechercherClientVue rechercherClientVue = new RechercherClientVue();
+				rechercherClientVue.setVisible(true);
+				rechercherClientVue.setResizable(false);
+				rechercherClientVue.setLocationRelativeTo(null);
 			}
 		});
 		btnRechercher.setBounds(21, 21, 109, 23);
