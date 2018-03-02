@@ -116,6 +116,8 @@ public class GestionClientVue extends JFrame {
 		btnAnnuler.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/cancel.png")));
 		btnAnnuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
 			}
 		});
 		btnAnnuler.setBounds(579, 11, 49, 44);

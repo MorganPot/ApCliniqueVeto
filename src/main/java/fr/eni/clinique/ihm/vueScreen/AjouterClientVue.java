@@ -67,12 +67,8 @@ public class AjouterClientVue extends JFrame {
 		JButton btnAnnuler = new JButton("");
 		btnAnnuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				} catch (Exception e2) {
-					// TODO: handle exception
-					e2.printStackTrace();
-				}
+				setVisible(false);
+				dispose();
 			}
 		});
 		btnAnnuler.setIcon(new ImageIcon(AjouterClientVue.class.getResource("/image/cancel.png")));
