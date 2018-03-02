@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -58,7 +59,7 @@ public class GestionPersonnelVue extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		table = new JTable();
+		table = new JTable(modelPersonnel);
 		table.setForeground(Color.WHITE);
 		table.setColumnSelectionAllowed(true);
 		table.setBackground(Color.GRAY);
@@ -90,6 +91,11 @@ public class GestionPersonnelVue extends JFrame {
 		btnSupprimer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+	            int[] selection = table.getSelectedRows();
+	 
+	            for(int i = selection.length - 1; i >= 0; i--){
+	                modelPersonnel.removePersonnel(selection[i]);
+	            }
 			}
 		});
 		btnAjouter.addActionListener(new ActionListener() {
@@ -116,9 +122,5 @@ public class GestionPersonnelVue extends JFrame {
 		table.setBorder(UIManager.getBorder("Button.border"));
 		table.setBounds(41, 336, 498, -247);
 		frame.getContentPane().add(table);
-		
-		
-		
-		
 	}
 }
