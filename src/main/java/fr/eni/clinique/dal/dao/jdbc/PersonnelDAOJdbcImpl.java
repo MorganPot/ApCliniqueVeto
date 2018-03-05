@@ -157,13 +157,13 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
         ObjectUtil.checkNotNull(id);
         
         Connection connection = null;
-        CallableStatement statement = null;
+        PreparedStatement statement = null;
         
         try {
             connection = MSSQLConnectionFactory.get();
-            statement = connection.prepareCall(DELETE_QUERY);
+            statement = connection.prepareStatement(DELETE_QUERY);
             
-            statement.setInt("CodePers", id);
+            statement.setInt(1, id);
             statement.execute();
             
         } catch (SQLException e) {

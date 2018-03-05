@@ -39,5 +39,5 @@ public interface PersonnelManager {
      * @param article
      * @throws ManagerException
      */
-    void removePersonnel(Personnel personnel) throws ManagerException;
+    void removePersonnel(int codePers) throws ManagerException;
 }

@@ -58,7 +58,5 @@ public class Personnel {
 		builder.append("Personnel [CodePers=").append(CodePers).append(", Nom=").append(Nom).append(", MotPasse=")
 				.append(MotPasse).append(", Role=").append(Role).append(", Archive=").append(Archive).append("]");
 		return builder.toString();
-	}
-	
-	
+	}	
 }

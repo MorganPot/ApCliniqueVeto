@@ -55,16 +55,15 @@ public class PersonnelManagerImpl implements PersonnelManager  {
 	/*
 	 * remove Personnel
 	 */
-    public void removePersonnel(Personnel personnel) throws ManagerException {
+    public void removePersonnel(int codePers) throws ManagerException {
         
-        ObjectUtil.checkNotNull(personnel);
-        ObjectUtil.checkNotNull(personnel.getCodePers());
+        ObjectUtil.checkNotNull(codePers);
         
         try {
-            personnelDAO.delete(personnel.getCodePers());
+            personnelDAO.delete(codePers);
             
         } catch (DaoException e) {
-            throw new ManagerException("Error inserting", e);
+            throw new ManagerException("Error removing", e);
         }
     }
 	
@@ -119,7 +118,7 @@ public class PersonnelManagerImpl implements PersonnelManager  {
             personnelDAO.update(personnel);
             
         } catch (DaoException e) {
-            throw new ManagerException("Error inserting", e);
+            throw new ManagerException("Error updating", e);
         }
-    }	
+    }
 }
