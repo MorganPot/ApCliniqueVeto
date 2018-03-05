@@ -2,6 +2,8 @@ package fr.eni.clinique.ihm.vueScreen;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -15,7 +17,7 @@ import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.model.PersonnelModel;
 import fr.eni.clinique.ihm.model.PersonnelModelDynamic;
 
-public class PersonnelVue extends JFrame{
+public class PersonnelVue extends JFrame implements Observer{
 	
     private PersonnelModelDynamic modele = new PersonnelModelDynamic();
     private JTable tableau;
@@ -51,7 +53,8 @@ public class PersonnelVue extends JFrame{
         }
  
         public void actionPerformed(ActionEvent e) {
-            modele.addPersonnel(null);
+        	AjouterPerso ajouterPerso = new AjouterPerso(model, PersonnelVue.this);
+			ajouterPerso.setVisible(true);
         }
     }
  
@@ -84,5 +87,11 @@ public class PersonnelVue extends JFrame{
 			personnels = modele.getValueAt(codePers[0]);	
 		}
 		return personnels;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

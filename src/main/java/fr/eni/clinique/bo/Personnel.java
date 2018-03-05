@@ -10,9 +10,8 @@ public class Personnel {
 	public Personnel() {
 	}
 		
-	public Personnel(int codePers, String nom, String motPasse, String role, Boolean archive) {
+	public Personnel(String nom, String motPasse, String role, Boolean archive) {
 		super();
-		CodePers = codePers;
 		Nom = nom;
 		MotPasse = motPasse;
 		Role = role;

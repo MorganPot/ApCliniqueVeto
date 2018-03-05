@@ -1,16 +1,18 @@
 package fr.eni.clinique.ihm.model;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
 import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.vueScreen.AjouterPerso;
 
-public class PersonnelModelDynamic extends AbstractTableModel {
+public class PersonnelModelDynamic extends AbstractTableModel{
    
 	private List<Personnel> personnels = new ArrayList<Personnel>();
 	private ManagerFactory factory = new ManagerFactory();
@@ -34,9 +36,9 @@ public class PersonnelModelDynamic extends AbstractTableModel {
         case 0:
             return personnels.get(rowIndex).getNom();
         case 1:
-            return personnels.get(rowIndex).getRole();
+            return personnels.get(rowIndex).getMotPasse().replace(personnels.get(rowIndex).getMotPasse(), "**********");
         case 2:
-            return personnels.get(rowIndex).getMotPasse();
+            return personnels.get(rowIndex).getRole();
         default:
             return null; //Ne devrait jamais arriver
 		}
@@ -59,17 +61,9 @@ public class PersonnelModelDynamic extends AbstractTableModel {
     }
  
     public void addPersonnel(Personnel personnel) {
-    	try {
-    		
-        	personnels.add(personnel);
-			model.addPersonnel(personnel);
-			
-		} catch (ManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-        fireTableRowsInserted(personnels.size() -1, personnels.size() -1);
+		personnels.add(personnel);
+
+        fireTableDataChanged();
     }
  
     public void removePersonnel(int rowIndex){
