@@ -188,8 +188,8 @@ public class GestionClientVue extends JFrame {
 		contentPane.add(textFieldAdresse2);
 		textFieldAdresse2.setColumns(10);
 		
-		table = new JTable();
-		table.setModel(model);
+		table = new JTable(model);
+	//	table.setModel(model);
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		table.setBounds(255, 315, 404, 172);
 		contentPane.add(new JScrollPane(table));

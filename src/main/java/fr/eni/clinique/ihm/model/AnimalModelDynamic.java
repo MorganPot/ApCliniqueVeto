@@ -43,7 +43,11 @@ public class AnimalModelDynamic extends AbstractTableModel{
               return null; //Ne devrait jamais arriver
   		}
       }
- 
+    
+    public String getColumnName(int columnIndex) {
+        return entetes[columnIndex];
+    }
+    
 	@Override
 	public int getColumnCount() {
         return animaux.size();
