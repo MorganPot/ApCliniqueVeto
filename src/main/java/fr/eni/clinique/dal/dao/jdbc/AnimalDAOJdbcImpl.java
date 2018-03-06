@@ -19,18 +19,18 @@ import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 public class AnimalDAOJdbcImpl implements AnimalDao{
 	
     private final static String SELECT_ALL_QUERY = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, "
-    												+ "Race, Espece, CodeClient, Tatouage, Antecedant, "
+    												+ "Race, Espece, CodeClient, Tatouage, Antecedents, "
     												+ "Archive FROM Animaux;";
     private final static String SELECT_ONE_QUERY = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, "
-													+ "Race, Espece, CodeClient, Tatouage, Antecedant, "
+													+ "Race, Espece, CodeClient, Tatouage, Antecedents, "
 													+ "Archive FROM Animaux WHERE CodeAnimal = ?;";
     private final static String INSERT_QUERY = "INSERT INTO Animaux(CodeAnimal, NomAnimal, Sexe, "
 													+ "Couleur, Race, Espece, CodeClient, Tatouage, "
-													+ "Antecedant, Archive) "
+													+ "Antecedents, Archive) "
 													+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private final static String UPDATE_QUERY = "UPDATE Animaux SET NomAnimal = ?, Sexe = ?, Couleur = ?, "
 												+ "Race = ?, Espece = ?, CodeClient = ?, Tatouage = ?"
-												+ ", Antecedant = ?, Archive = ? WHERE CodeAnimal = ?;";
+												+ ", Antecedents = ?, Archive = ? WHERE CodeAnimal = ?;";
     private static final String DELETE_QUERY = "DELETE FROM Animaux WHERE CodeAnimal = ?";
     
     
@@ -90,7 +90,7 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
     	animal.setEspece(resultSet.getString("Espece"));
     	animal.setCodeClient(resultSet.getInt("CodeClient"));
     	animal.setTatouage(resultSet.getString("Tatouage"));
-    	animal.setAntecedents(resultSet.getString("Antecedant"));
+    	animal.setAntecedents(resultSet.getString("Antecedents"));
     	animal.setArchive(resultSet.getBoolean("Archive"));
         
         return animal;

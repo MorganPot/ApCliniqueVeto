@@ -15,6 +15,6 @@ public interface AnimalManager {
     
     void updateAnimal(Animal animal) throws ManagerException;
     
-    void removeAnimal(Animal animal) throws ManagerException;
+    void removeAnimal(Integer id) throws ManagerException;
 	
 }
