@@ -46,6 +46,8 @@ public class AgendaVue extends JFrame {
 				try {
 					AgendaVue frame = new AgendaVue();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -22,7 +22,6 @@ import javax.swing.JMenuItem;
 
 
 public class AccueilVue extends JFrame implements ActionListener {
-
 	private JPanel contentPane;
 	private PersonnelVue gestionPersonnelVue;
 	private GestionClientVue gestionClientVue;
@@ -38,6 +37,8 @@ public class AccueilVue extends JFrame implements ActionListener {
 				try {
 					AccueilVue frame = new AccueilVue();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -83,7 +84,10 @@ public class AccueilVue extends JFrame implements ActionListener {
 		mnAgenda.setActionCommand("agenda");
 		mnAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				AgendaVue agendaVue = new AgendaVue();
+				agendaVue.setVisible(true);
+				agendaVue.setResizable(false);
+				agendaVue.setLocationRelativeTo(null);
 			}
 		});
 		menuBar.add(mnAgenda);

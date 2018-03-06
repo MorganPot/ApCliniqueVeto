@@ -28,7 +28,7 @@ public class PersonnelVue extends JFrame implements Observer{
         super();
  
         setTitle("Gestion du personnels");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         tableau = new JTable(modele);
  
