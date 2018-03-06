@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
 
 import fr.eni.clinique.ihm.model.AnimalModelDynamic;
 
@@ -59,7 +60,7 @@ public class GestionClientVue extends JFrame {
 	 */
 	public GestionClientVue() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 745, 487);
+		setBounds(100, 100, 845, 487);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -67,7 +68,7 @@ public class GestionClientVue extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel.setBounds(32, 31, 663, 66);
+		panel.setBounds(32, 31, 762, 66);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -98,7 +99,7 @@ public class GestionClientVue extends JFrame {
 				}
 			}
 		});
-		btnAjouter.setBounds(209, 21, 89, 23);
+		btnAjouter.setBounds(275, 21, 89, 23);
 		panel.add(btnAjouter);
 		
 		JButton btnSuppimer = new JButton("Supprimer");
@@ -106,7 +107,7 @@ public class GestionClientVue extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnSuppimer.setBounds(308, 21, 99, 23);
+		btnSuppimer.setBounds(375, 21, 99, 23);
 		panel.add(btnSuppimer);
 		
 		JButton btnValider = new JButton("");
@@ -115,7 +116,7 @@ public class GestionClientVue extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnValider.setBounds(508, 11, 49, 44);
+		btnValider.setBounds(608, 11, 49, 44);
 		panel.add(btnValider);
 		
 		JButton btnAnnuler = new JButton("");
@@ -126,7 +127,7 @@ public class GestionClientVue extends JFrame {
 				dispose();
 			}
 		});
-		btnAnnuler.setBounds(579, 11, 49, 44);
+		btnAnnuler.setBounds(679, 11, 49, 44);
 		panel.add(btnAnnuler);
 		
 		JLabel lblCode = new JLabel("Code");
@@ -189,24 +190,25 @@ public class GestionClientVue extends JFrame {
 		textFieldAdresse2.setColumns(10);
 		
 		table = new JTable(model);
-	//	table.setModel(model);
-		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		table.setBounds(255, 315, 404, 172);
-		contentPane.add(new JScrollPane(table));
+		table.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+		JPanel panT = new JPanel();
+		panT.setBounds(320, 135, 500, 200);
+		panT.add(new JScrollPane(table));
+		contentPane.add(panT);
 		
 		JButton btnAjouterAnimal = new JButton("");
 		btnAjouterAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/add-button.png")));
-		btnAjouterAnimal.setBounds(494, 367, 23, 23);
+		btnAjouterAnimal.setBounds(494, 384, 23, 23);
 		contentPane.add(btnAjouterAnimal);
 		
 		JButton btnSupprimerAnimal = new JButton("");
 		btnSupprimerAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/open-trash-can.png")));
-		btnSupprimerAnimal.setBounds(543, 367, 23, 23);
+		btnSupprimerAnimal.setBounds(543, 384, 23, 23);
 		contentPane.add(btnSupprimerAnimal);
 		
 		JButton btnEditerAnimal = new JButton("");
 		btnEditerAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/election-checklist-symbol.png")));
-		btnEditerAnimal.setBounds(589, 367, 23, 23);
+		btnEditerAnimal.setBounds(589, 384, 23, 23);
 		contentPane.add(btnEditerAnimal);
 	}
 }

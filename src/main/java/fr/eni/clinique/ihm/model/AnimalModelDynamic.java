@@ -14,7 +14,7 @@ public class AnimalModelDynamic extends AbstractTableModel{
 	private ManagerFactory factory = new ManagerFactory();
 	private AnimalModel model = new AnimalModel();
     
-    private final String[] entetes = {"Numéro", "Nom", "Sexe", "Couleur", "Race", "Espèce", "Tatouage"};
+    private final String[] entetes = {"Numero", "Nom", "Sexe", "Couleur", "Race", "Espece", "Tatouage"};
     
     public AnimalModelDynamic() {
         super();
@@ -50,12 +50,13 @@ public class AnimalModelDynamic extends AbstractTableModel{
     
 	@Override
 	public int getColumnCount() {
-        return animaux.size();
+		 return entetes.length;
+       
 	}
 
 	@Override
 	public int getRowCount() {
-        return entetes.length;
+		 return animaux.size();
 	}
     
     public void refresh() {
@@ -67,4 +68,5 @@ public class AnimalModelDynamic extends AbstractTableModel{
 		}
 		fireTableDataChanged();
     }
+
 }
