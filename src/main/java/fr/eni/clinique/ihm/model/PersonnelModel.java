@@ -21,6 +21,11 @@ public class PersonnelModel {
 		personnelM.removePersonnel(index);
 	}
 	
+
+	public void updatePersonnel(int index, String pass) throws ManagerException {
+		personnelM.updatePersonnel(index, pass);
+	}
+	
 	public List<Personnel> selectAll() throws ManagerException {
 		return personnelM.getPersonnel();
 	}

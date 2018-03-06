@@ -127,23 +127,15 @@ private static ClientManagerImpl SINGLETON;
         return client;
     }
 
+	@Override
+	public void updateClient(Client client) throws ManagerException {
+		// TODO Auto-generated method stub
+		
+	}
+
     /**
      * Use Method update() of DAO
      * Throw a ManagerException if newArticle is not valid.
      * Catch Dao Exception to throw ManagerException.
-     */
-    @Override
-    public void updateClient(Client client) throws ManagerException {
-        
-        ObjectUtil.checkNotNull(client);
-        try {
-
-            validerClient(client);
-            
-            clientDao.update(client);
-            
-        } catch (DaoException e) {
-            throw new ManagerException("Error updating", e);
-        }
-    }    
+     */   
 }

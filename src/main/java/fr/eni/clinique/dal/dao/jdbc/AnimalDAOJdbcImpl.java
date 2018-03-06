@@ -135,40 +135,40 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
         return animal;
     }
 
-	@Override
-	public void update(Animal element) throws DaoException {
-		// TODO Auto-generated method stub
-
-        // Check not null 
-        ObjectUtil.checkNotNull(element);
-        ObjectUtil.checkNotNull(element.getCodeAnimal());
-        
-        Connection connection = null;
-        PreparedStatement statement = null;
-        
-        try {
-            connection = MSSQLConnectionFactory.get();
-            statement = connection.prepareStatement(UPDATE_QUERY);
-            
-            statement.setString(1, element.getNomAnimal());
-            statement.setString(2, element.getSexe());
-            statement.setString(3, element.getCouleur());
-            statement.setString(4, element.getRace());
-            statement.setString(5, element.getEspece());
-            statement.setInt(6, element.getCodeClient());
-            statement.setString(7, element.getTatouage());
-            statement.setString(8, element.getAntecedents());
-            statement.setBoolean(9, element.getArchive());
-            statement.setInt(10, element.getCodeAnimal());
-            
-            statement.executeUpdate();
-            
-        } catch (SQLException e) {
-            throw new DaoException("Erreur d'execution de la requete UPDATE Animal", e);
-        } finally {
-            ResourceUtil.safeClose(connection, statement);
-        }
-	}
+//	@Override
+//	public void update(Animal element) throws DaoException {
+//		// TODO Auto-generated method stub
+//
+//        // Check not null 
+//        ObjectUtil.checkNotNull(element);
+//        ObjectUtil.checkNotNull(element.getCodeAnimal());
+//        
+//        Connection connection = null;
+//        PreparedStatement statement = null;
+//        
+//        try {
+//            connection = MSSQLConnectionFactory.get();
+//            statement = connection.prepareStatement(UPDATE_QUERY);
+//            
+//            statement.setString(1, element.getNomAnimal());
+//            statement.setString(2, element.getSexe());
+//            statement.setString(3, element.getCouleur());
+//            statement.setString(4, element.getRace());
+//            statement.setString(5, element.getEspece());
+//            statement.setInt(6, element.getCodeClient());
+//            statement.setString(7, element.getTatouage());
+//            statement.setString(8, element.getAntecedents());
+//            statement.setBoolean(9, element.getArchive());
+//            statement.setInt(10, element.getCodeAnimal());
+//            
+//            statement.executeUpdate();
+//            
+//        } catch (SQLException e) {
+//            throw new DaoException("Erreur d'execution de la requete UPDATE Animal", e);
+//        } finally {
+//            ResourceUtil.safeClose(connection, statement);
+//        }
+//	}
 
 	@Override
 	public void delete(Integer id) throws DaoException {
@@ -222,4 +222,10 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
         }
         return animal;
     }
+
+@Override
+public void update(Integer id, String password) throws DaoException {
+	// TODO Auto-generated method stub
+	
+}
 }

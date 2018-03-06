@@ -108,14 +108,12 @@ public class PersonnelManagerImpl implements PersonnelManager  {
     /*
      * Update personnel
      */
-    public void updatePersonnel(Personnel personnel) throws ManagerException {
+    public void updatePersonnel(int id, String pass) throws ManagerException {
         
-        ObjectUtil.checkNotNull(personnel);
+        ObjectUtil.checkNotNull(id);
         try {
-
-            validerPersonnel(personnel);
             
-            personnelDAO.update(personnel);
+            personnelDAO.update(id, pass);
             
         } catch (DaoException e) {
             throw new ManagerException("Error updating", e);

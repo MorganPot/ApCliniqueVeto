@@ -141,43 +141,43 @@ public class ClientDAOJdbcImpl implements ClientDao{
         
         return client;
     }
-
-	@Override
-	public void update(Client element) throws DaoException {
-		// TODO Auto-generated method stub
-
-        // Check not null 
-        ObjectUtil.checkNotNull(element);
-        ObjectUtil.checkNotNull(element.getCodeClient());
-        
-        Connection connection = null;
-        PreparedStatement statement = null;
-        
-        try {
-            connection = MSSQLConnectionFactory.get();
-            statement = connection.prepareStatement(UPDATE_QUERY);
-            
-            statement.setString(1, element.getNomClient());
-            statement.setString(2, element.getPrenomClient());
-            statement.setString(3, element.getAdresse1());
-            statement.setString(4, element.getAdresse2());
-            statement.setString(5, element.getCodePostal());
-            statement.setString(6, element.getVille());
-            statement.setString(7, element.getNumTel());
-            statement.setString(8, element.getAssurance());
-            statement.setString(9, element.getEmail());
-            statement.setString(10, element.getRemarque());
-            statement.setBoolean(11, element.getArchive());
-            statement.setInt(1, element.getCodeClient());
-            
-            statement.executeUpdate();
-            
-        } catch (SQLException e) {
-            throw new DaoException("Erreur d'execution de la requete UPDATE Client", e);
-        } finally {
-            ResourceUtil.safeClose(connection, statement);
-        }
-	}
+//
+//	@Override
+//	public void update(Client element) throws DaoException {
+//		// TODO Auto-generated method stub
+//
+//        // Check not null 
+//        ObjectUtil.checkNotNull(element);
+//        ObjectUtil.checkNotNull(element.getCodeClient());
+//        
+//        Connection connection = null;
+//        PreparedStatement statement = null;
+//        
+//        try {
+//            connection = MSSQLConnectionFactory.get();
+//            statement = connection.prepareStatement(UPDATE_QUERY);
+//            
+//            statement.setString(1, element.getNomClient());
+//            statement.setString(2, element.getPrenomClient());
+//            statement.setString(3, element.getAdresse1());
+//            statement.setString(4, element.getAdresse2());
+//            statement.setString(5, element.getCodePostal());
+//            statement.setString(6, element.getVille());
+//            statement.setString(7, element.getNumTel());
+//            statement.setString(8, element.getAssurance());
+//            statement.setString(9, element.getEmail());
+//            statement.setString(10, element.getRemarque());
+//            statement.setBoolean(11, element.getArchive());
+//            statement.setInt(1, element.getCodeClient());
+//            
+//            statement.executeUpdate();
+//            
+//        } catch (SQLException e) {
+//            throw new DaoException("Erreur d'execution de la requete UPDATE Client", e);
+//        } finally {
+//            ResourceUtil.safeClose(connection, statement);
+//        }
+//	}
 
 	@Override
 	public void delete(Integer id) throws DaoException {
@@ -231,4 +231,10 @@ public class ClientDAOJdbcImpl implements ClientDao{
         }
         return client;
     }
+
+@Override
+public void update(Integer id, String password) throws DaoException {
+	// TODO Auto-generated method stub
+	
+}
 }

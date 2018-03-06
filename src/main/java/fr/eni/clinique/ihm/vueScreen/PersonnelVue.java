@@ -26,9 +26,10 @@ public class PersonnelVue extends JFrame implements Observer{
     public PersonnelVue() {
         super();
  
-        setTitle("JTable avec modèle dynamique");
+        setTitle("Gestion du personnels");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
+        setResizable(false); // Fenetre pas redimensionnable
+        
         tableau = new JTable(modele);
  
         getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
@@ -37,8 +38,9 @@ public class PersonnelVue extends JFrame implements Observer{
  
         boutons.add(new JButton(new AddAction()));
         boutons.add(new JButton(new RemoveAction()));
+        boutons.add(new JButton(new UpdateAction()));
  
-        getContentPane().add(boutons, BorderLayout.SOUTH);
+        getContentPane().add(boutons, BorderLayout.NORTH);
  
         pack();
     }
@@ -55,6 +57,7 @@ public class PersonnelVue extends JFrame implements Observer{
         public void actionPerformed(ActionEvent e) {
         	AjouterPerso ajouterPerso = new AjouterPerso(model, PersonnelVue.this);
 			ajouterPerso.setVisible(true);
+			modele.refresh();	
         }
     }
  
@@ -73,11 +76,20 @@ public class PersonnelVue extends JFrame implements Observer{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-				modele.removePersonnel(tableau.getSelectedRow());
 				modele.refresh();	
 			}
 		}
+    }
+    
+    private class UpdateAction extends AbstractAction {
+        private UpdateAction() {
+            super("Réinitialiser");
+        }
+ 
+        public void actionPerformed(ActionEvent e) {
+        	ModifierPerso modifPerso = new ModifierPerso(model, PersonnelVue.this);
+			modifPerso.setVisible(true);
+        }
     }
     
     public Personnel getPersonnels() {
@@ -92,6 +104,6 @@ public class PersonnelVue extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+		modele.refresh();
 	}
 }

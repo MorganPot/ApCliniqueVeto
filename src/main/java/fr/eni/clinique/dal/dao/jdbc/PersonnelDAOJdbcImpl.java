@@ -24,8 +24,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
 													+ " Archive FROM Personnels WHERE CodePers = ?";
     private final static String INSERT_QUERY = "INSERT INTO Personnels(Nom, MotPasse, Role, Archive) "
     											+ "VALUES (?, ?, ?, ?);";
-    private final static String UPDATE_QUERY = "UPDATE Personnels SET Nom = ?, MotPasse = ?, Role = ?, "
-    											+ "Archive = ? WHERE CodePers = ?;";
+    private final static String UPDATE_QUERY = "UPDATE Personnels SET MotPasse = ? WHERE CodePers = ?;";
     private static final String DELETE_QUERY = "DELETE FROM Personnels WHERE CodePers=?";
     
     
@@ -121,12 +120,11 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
     }
 
 	@Override
-	public void update(Personnel element) throws DaoException {
+	public void update(Integer id, String pass) throws DaoException {
 		// TODO Auto-generated method stub
 
         // Check not null 
-        ObjectUtil.checkNotNull(element);
-        ObjectUtil.checkNotNull(element.getCodePers());
+        ObjectUtil.checkNotNull(id);
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -135,11 +133,8 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
             connection = MSSQLConnectionFactory.get();
             statement = connection.prepareStatement(UPDATE_QUERY);
             
-            statement.setString(1, element.getNom()); // Paramètre non nommés, cad avec des indexes
-            statement.setString(2, element.getMotPasse());
-            statement.setString(3, element.getRole());
-            statement.setBoolean(4, element.getArchive());
-            statement.setInt(5, element.getCodePers());
+            statement.setString(1, pass);
+            statement.setInt(2, id);
             
             statement.executeUpdate();
             

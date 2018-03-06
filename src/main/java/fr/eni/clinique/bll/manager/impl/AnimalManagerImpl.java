@@ -103,19 +103,11 @@ private static AnimalManagerImpl SINGLETON;
         }
         return animal;
     }
-    
-    @Override
-    public void updateAnimal(Animal animal) throws ManagerException {
-        
-        ObjectUtil.checkNotNull(animal);
-        try {
 
-            validerAnimal(animal);
-            
-            animalDao.update(animal);
-            
-        } catch (DaoException e) {
-            throw new ManagerException("Error updating", e);
-        }
-    }    
+	@Override
+	public void updateAnimal(Animal animal) throws ManagerException {
+		// TODO Auto-generated method stub
+		
+	}
+ 
 }

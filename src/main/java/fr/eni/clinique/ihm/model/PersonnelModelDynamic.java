@@ -59,17 +59,6 @@ public class PersonnelModelDynamic extends AbstractTableModel{
     public Personnel getValueAt(int rowIndex) {
     	return personnels.get(rowIndex);
     }
- 
-    public void addPersonnel(Personnel personnel) {
-		personnels.add(personnel);
-
-        fireTableDataChanged();
-    }
- 
-    public void removePersonnel(int rowIndex){
-    	personnels.remove(rowIndex);
-        fireTableRowsDeleted(rowIndex, rowIndex);
-    }
     
     public void refresh() {
 		try {

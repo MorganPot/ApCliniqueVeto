@@ -32,7 +32,7 @@ public interface PersonnelManager {
      * @param article
      * @throws ManagerException
      */
-    void updatePersonnel(Personnel personnel) throws ManagerException;
+    void updatePersonnel(int codePers, String password) throws ManagerException;
     
     /**
      * Supprimer un Personnel.

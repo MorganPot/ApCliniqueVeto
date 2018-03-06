@@ -30,7 +30,7 @@ public interface GenericDao<T, ID> {
 	 * 
 	 * @throws DaoException
 	 */
-	void update(T element) throws DaoException;	
+	void update(ID id, String password) throws DaoException;	
 	
 	/**
 	 * Delete an Element.

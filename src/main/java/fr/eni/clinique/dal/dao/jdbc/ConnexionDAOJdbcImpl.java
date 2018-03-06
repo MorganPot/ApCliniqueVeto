@@ -82,11 +82,11 @@ public class ConnexionDAOJdbcImpl implements ConnexionDao{
 		return null;
 	}
 
-	@Override
-	public void update(Personnel element) throws DaoException {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void update(Personnel element) throws DaoException {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public void delete(Integer id) throws DaoException {
@@ -98,5 +98,11 @@ public class ConnexionDAOJdbcImpl implements ConnexionDao{
 	public Personnel selectById(Integer id) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(Integer id, String password) throws DaoException {
+		// TODO Auto-generated method stub
+		
 	}
 }
