@@ -52,13 +52,12 @@ private static AnimalManagerImpl SINGLETON;
      * Catch Dao Exception to throw ManagerException.
      */
     @Override
-    public void removeAnimal(Animal animal) throws ManagerException {
+    public void removeAnimal(Integer id) throws ManagerException {
         
-        ObjectUtil.checkNotNull(animal);
-        ObjectUtil.checkNotNull(animal.getCodeAnimal());
+        ObjectUtil.checkNotNull(id);
         
         try {
-            animalDao.delete(animal.getCodeAnimal());
+            animalDao.delete(id);
             
         } catch (DaoException e) {
             throw new ManagerException("Error deleting", e);

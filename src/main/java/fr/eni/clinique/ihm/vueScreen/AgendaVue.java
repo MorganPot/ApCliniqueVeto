@@ -135,7 +135,7 @@ public class AgendaVue extends JFrame {
         defaults.setFormat(ComponentFormatDefaults.Key.MONTH_SELECTOR, new SimpleDateFormat("MMM"));
         
         JDatePicker datePicker = new JDatePicker();
-        datePicker.getFormattedextField().setColumns(1);
+        datePicker.getFormattedTextField().setColumns(1);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 3;
 		gbc_textField.insets = new Insets(0, 10, 5, 0);

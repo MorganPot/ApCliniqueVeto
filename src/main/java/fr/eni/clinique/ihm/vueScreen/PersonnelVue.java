@@ -18,8 +18,9 @@ import fr.eni.clinique.ihm.model.PersonnelModel;
 import fr.eni.clinique.ihm.model.PersonnelModelDynamic;
 
 public class PersonnelVue extends JFrame implements Observer{
-	
-    private PersonnelModelDynamic modele = new PersonnelModelDynamic();
+
+	private static final long serialVersionUID = 1L;
+	private PersonnelModelDynamic modele = new PersonnelModelDynamic();
     private JTable tableau;
     private PersonnelModel model = new PersonnelModel();
  
@@ -28,7 +29,6 @@ public class PersonnelVue extends JFrame implements Observer{
  
         setTitle("Gestion du personnels");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false); // Fenetre pas redimensionnable
         
         tableau = new JTable(modele);
  
