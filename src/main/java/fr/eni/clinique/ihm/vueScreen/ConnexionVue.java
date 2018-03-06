@@ -152,7 +152,10 @@ public class ConnexionVue extends JFrame {
                 showFailureMessage("Login/Password incorrect !!");
             } else {
                 if(controller.verifLog(textField.getText().trim(), passwordField.getText().trim())){
-                	showSuccessMessage("Connexion réussi");
+                	AccueilVue accueilVue = new AccueilVue();
+                	accueilVue.setVisible(true);
+                	accueilVue.setResizable(false);
+                	accueilVue.setLocationRelativeTo(null);
                 }
                 else {
                     showFailureMessage("Login/Password incorrect !!");

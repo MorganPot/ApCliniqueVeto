@@ -45,7 +45,9 @@ public class PersonnelVue extends JFrame implements Observer{
         pack();
     }
  
-    public static void main(String[] args) {
+   
+
+	public static void main(String[] args) {
         new PersonnelVue().setVisible(true);
     }
  
