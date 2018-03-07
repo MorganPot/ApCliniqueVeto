@@ -1,5 +1,6 @@
 package fr.eni.clinique.bll.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.clinique.bll.exception.ManagerException;
@@ -130,17 +131,17 @@ private static ClientManagerImpl SINGLETON;
 	}
 
 	@Override
-	public Client selectClient(String nom) throws ManagerException {
+	public List<Client> selectClient(String nom) throws ManagerException {
 		// TODO Auto-generated method stub
         ObjectUtil.checkNotNull(nom);
-        Client leCli = null;
+        List<Client> clients = new ArrayList<Client>();
         try {
-        	leCli = clientDao.selectByNom(nom);
+        	clients = clientDao.selectByNom(nom);
             
         } catch (DaoException e) {
             throw new ManagerException("Error select", e);
         }
-        return leCli;
+        return clients;
 	}
 
     /**

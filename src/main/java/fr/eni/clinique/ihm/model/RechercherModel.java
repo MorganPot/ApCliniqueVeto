@@ -12,7 +12,6 @@ public class RechercherModel extends AbstractTableModel{
 	private static final long serialVersionUID = 12825510527774507L;
 	
 	private List<Client> clients = new ArrayList<Client>();
-	private ClientModel model = new ClientModel();
     
     private final String[] entetes = {"Nom", "Prénom", "Code Postal", "Ville"};
  
@@ -48,8 +47,11 @@ public class RechercherModel extends AbstractTableModel{
         return entetes[columnIndex];
     }
     
-    public void refresh(String nom) {
-		clients.add(model.selectClient(nom));
+    public void refresh(List<Client> listeCli) {
+    	for (Client cli : listeCli) {
+    		clients.add(cli);
+		}
+        fireTableRowsInserted(clients.size() -1, clients.size() -1);
 		fireTableDataChanged();
     }
 }

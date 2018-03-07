@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,9 +33,9 @@ public class RechercherClientVue extends JFrame {
 	private JTextField txtRechercher;
 	private JTable table;
     private ClientModel model;
-    private RechercherModel tableau;
+    private RechercherModel tableau = new RechercherModel();
 	final Observer observable = new Observer();
-	private Client leCli = null;
+    List<Client> clients = new ArrayList<Client>();
 
 	public RechercherClientVue(ClientModel model) {
 		this.model = model;
@@ -71,8 +73,10 @@ public class RechercherClientVue extends JFrame {
 		lblErreur.setVisible(false);
 
 		table = new JTable(tableau);
-		table.setBounds(31, 278, 496, 150);
-		contentPane.add(new JScrollPane(table));
+		//table.setBounds(0, 0, 500, 20);
+		JScrollPane scroll = new JScrollPane(table);
+		scroll.setBounds(50, 100, 500, 200);
+		contentPane.add(scroll);
 		
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.setBounds(397, 21, 103, 23);
@@ -85,9 +89,8 @@ public class RechercherClientVue extends JFrame {
 					lblErreur.setVisible(true);
 				}
 				else {
-					System.out.println(txtRechercher.getText().trim());
-					leCli = model.selectClient(txtRechercher.getText().trim());
-					tableau.refresh(leCli.getNomClient());
+					clients = model.selectClient(txtRechercher.getText().trim());
+					tableau.refresh(clients);
 //					observable.changeData(personnel);
 				}
 			}

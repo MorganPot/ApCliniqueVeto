@@ -15,5 +15,5 @@ public interface ClientManager {
     
     void removeClient(Client client) throws ManagerException;
 
-    Client selectClient(String nom) throws ManagerException;
+    List<Client> selectClient(String nom) throws ManagerException;
 }

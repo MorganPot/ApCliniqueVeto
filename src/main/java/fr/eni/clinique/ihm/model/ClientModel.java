@@ -22,14 +22,14 @@ public class ClientModel extends Observable	{
 		}
     }
     
-    public Client selectClient(String nom) {
-    	Client leCli = null;
+    public List<Client> selectClient(String nom) {
+        List<Client> clients = new ArrayList<Client>();
         try {
-			leCli = clientManager.selectClient(nom);
+        	clients = clientManager.selectClient(nom);
 		} catch (ManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return leCli;
+        return clients;
     }
 }

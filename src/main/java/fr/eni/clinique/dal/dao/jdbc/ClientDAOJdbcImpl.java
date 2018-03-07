@@ -29,7 +29,7 @@ public class ClientDAOJdbcImpl implements ClientDao{
     private final static String SELECT_ONE_QUERY_BY_NAME = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive FROM Clients "
-													+ "WHERE NomClient = ?;";
+													+ "WHERE NomClient LIKE ?;";
     private final static String INSERT_QUERY = "INSERT INTO Clients(NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive) "
@@ -243,25 +243,26 @@ public void update(Integer id, String password) throws DaoException {
 }
 
 @Override
-public Client selectByNom(String nom) throws DaoException {
+public List<Client> selectByNom(String nom) throws DaoException {
     // Check not null 
     ObjectUtil.checkNotNull(nom);
     
     Connection connection = null;
     PreparedStatement statement = null;
     ResultSet resultSet = null;
-    Client client = null;
+    List<Client> clients = new ArrayList<Client>();
     
+    String param = '%' + nom + '%';
     try {
         connection = MSSQLConnectionFactory.get();
         statement = connection.prepareStatement(SELECT_ONE_QUERY_BY_NAME);
         
-        statement.setString(1, nom);
+        statement.setString(1, param);
         
         resultSet = statement.executeQuery();
         
-        if(resultSet.next()) {
-        	client = createClient(resultSet);
+        while(resultSet.next()) {
+        	clients.add(createClient(resultSet));
         }
         
     } catch (SQLException e) {
@@ -269,6 +270,6 @@ public Client selectByNom(String nom) throws DaoException {
     } finally {
         ResourceUtil.safeClose(connection, statement, resultSet);
     }
-    return client;
+    return clients;
 }
 }

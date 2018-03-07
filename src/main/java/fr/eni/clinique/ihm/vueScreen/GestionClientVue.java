@@ -195,9 +195,11 @@ public class GestionClientVue extends JFrame implements Observer{
 		
 		table = new JTable(model);
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+		JScrollPane scroll = new JScrollPane(table);
+		scroll.setBounds(0, 0, 500, 200);
 		JPanel panT = new JPanel();
 		panT.setBounds(320, 135, 500, 200);
-		panT.add(new JScrollPane(table));
+		panT.add(scroll);
 		contentPane.add(panT);
 		
 		JButton btnAjouterAnimal = new JButton("");
