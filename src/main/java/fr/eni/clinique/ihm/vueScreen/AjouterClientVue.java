@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.model.ClientModel;
+import fr.eni.clinique.ihm.model.PersonnelModel;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,27 +30,21 @@ public class AjouterClientVue extends JFrame {
 	private JTextField textFieldAdresse2;
 	private JTextField textFieldCodePostal;
 	private JTextField textFieldVille;
+	
+	private GestionClientVue vue = new GestionClientVue();
+    private ClientModel model;
+	final Observer observable = new Observer();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AjouterClientVue frame = new AjouterClientVue();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public AjouterClientVue(ClientModel model,GestionClientVue mafenetre) {
+		this.model = model;
+		this.observable.addObserver(mafenetre);
+		initialize();
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public AjouterClientVue() {
+	public void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 466);
 		contentPane = new JPanel();
@@ -58,8 +57,35 @@ public class AjouterClientVue extends JFrame {
 		panel.setBounds(10, 11, 414, 62);
 		contentPane.add(panel);
 		panel.setLayout(null);
+				
+		JLabel lblErreur = new JLabel("Veuillez remplir les champs");
+		lblErreur.setBounds(150,132, 300, 23);
+		contentPane.add(lblErreur);
+		lblErreur.setVisible(false);
 		
 		JButton btnValider = new JButton("");
+		btnValider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(textFieldNom.getText().length() == 0 || textFieldPrenom.getText().length() == 0
+		    || textFieldAdresse.getText().length() == 0 || textFieldCodePostal.getText().length() == 0
+		    || textFieldVille.getText().length() == 0)
+				{
+					lblErreur.setVisible(true);
+				}
+				else {
+					Client client = new Client(textFieldNom.getText(), textFieldPrenom.getText(),
+											   textFieldAdresse.getText(), textFieldAdresse2.getText(), 
+											   textFieldCodePostal.getText(), textFieldVille.getText(), 
+											   false);
+					
+					model.addClient(client);
+//					vue.ajoutClient(client);
+					
+					observable.changeData(client);
+					dispose();
+				}
+			}
+		});
 		btnValider.setIcon(new ImageIcon(AjouterClientVue.class.getResource("/image/tick.png")));
 		btnValider.setBounds(31, 11, 160, 40);
 		panel.add(btnValider);
@@ -74,15 +100,6 @@ public class AjouterClientVue extends JFrame {
 		btnAnnuler.setIcon(new ImageIcon(AjouterClientVue.class.getResource("/image/cancel.png")));
 		btnAnnuler.setBounds(227, 11, 160, 40);
 		panel.add(btnAnnuler);
-		
-		JLabel lblCode = new JLabel("Code");
-		lblCode.setBounds(96, 129, 46, 14);
-		contentPane.add(lblCode);
-		
-		textFieldCode = new JTextField();
-		textFieldCode.setBounds(189, 126, 153, 20);
-		contentPane.add(textFieldCode);
-		textFieldCode.setColumns(10);
 		
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setBounds(96, 167, 46, 14);

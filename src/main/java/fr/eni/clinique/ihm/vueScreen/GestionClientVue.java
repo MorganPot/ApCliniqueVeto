@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,11 +18,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.JTableHeader;
 
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.ihm.model.AnimalModelDynamic;
+import fr.eni.clinique.ihm.model.ClientModel;
 
-public class GestionClientVue extends JFrame {
+public class GestionClientVue extends JFrame implements Observer{
 
 	/**
 	 * 
@@ -36,6 +39,7 @@ public class GestionClientVue extends JFrame {
 	private JTextField textFieldAdresse2;
 	private JTable table;
 	private AnimalModelDynamic model = new AnimalModelDynamic();
+    private ClientModel modelCli = new ClientModel();
 
 	/**
 	 * Launch the application.
@@ -75,7 +79,7 @@ public class GestionClientVue extends JFrame {
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RechercherClientVue rechercherClientVue = new RechercherClientVue();
+				RechercherClientVue rechercherClientVue = new RechercherClientVue(modelCli);
 				rechercherClientVue.setVisible(true);
 				rechercherClientVue.setResizable(false);
 				rechercherClientVue.setLocationRelativeTo(null);
@@ -88,7 +92,7 @@ public class GestionClientVue extends JFrame {
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					AjouterClientVue ajouterClientVue = new AjouterClientVue();
+					AjouterClientVue ajouterClientVue = new AjouterClientVue(modelCli, GestionClientVue.this);
 					ajouterClientVue.setVisible(true);
 					ajouterClientVue.setResizable(false);
 					ajouterClientVue.setLocationRelativeTo(null);
@@ -210,5 +214,16 @@ public class GestionClientVue extends JFrame {
 		btnEditerAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/election-checklist-symbol.png")));
 		btnEditerAnimal.setBounds(589, 384, 23, 23);
 		contentPane.add(btnEditerAnimal);
+	}
+	
+	@Override
+	public void update(Observable o, Object client) {
+		
+		textFieldNom.setText(((Client) client).getNomClient());
+		textFieldPrenom.setText(((Client) client).getPrenomClient());
+		textFieldAdresse.setText(((Client) client).getAdresse1());
+		textFieldAdresse2.setText(((Client) client).getAdresse2());
+		textFieldCodePostal.setText(((Client) client).getCodePostal());
+		textFieldVille.setText(((Client) client).getVille());
 	}
 }

@@ -26,6 +26,10 @@ public class ClientDAOJdbcImpl implements ClientDao{
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive FROM Clients "
 													+ "WHERE CodeClient = ?;";
+    private final static String SELECT_ONE_QUERY_BY_NAME = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, "
+													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
+													+ "Email, Remarque, Archive FROM Clients "
+													+ "WHERE NomClient = ?;";
     private final static String INSERT_QUERY = "INSERT INTO Clients(NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive) "
@@ -236,5 +240,35 @@ public class ClientDAOJdbcImpl implements ClientDao{
 public void update(Integer id, String password) throws DaoException {
 	// TODO Auto-generated method stub
 	
+}
+
+@Override
+public Client selectByNom(String nom) throws DaoException {
+    // Check not null 
+    ObjectUtil.checkNotNull(nom);
+    
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    Client client = null;
+    
+    try {
+        connection = MSSQLConnectionFactory.get();
+        statement = connection.prepareStatement(SELECT_ONE_QUERY_BY_NAME);
+        
+        statement.setString(1, nom);
+        
+        resultSet = statement.executeQuery();
+        
+        if(resultSet.next()) {
+        	client = createClient(resultSet);
+        }
+        
+    } catch (SQLException e) {
+        throw new DaoException("Erreur d'execution de la requete select 1 client", e);
+    } finally {
+        ResourceUtil.safeClose(connection, statement, resultSet);
+    }
+    return client;
 }
 }

@@ -17,7 +17,7 @@ public class AppliTestBO {
 	public static void main(String[] args) {
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(new java.util.Date());
-		Client cli1 = new Client(1, "NOEL","Pierre-Axel","1 Chateau Eraudière","La Vigne","44000","Nantes","0645743525","Axa","pierreaxel.noel@gmail.com","remarque", true);
+		Client cli1 = new Client("NOEL","Pierre-Axel","1 Chateau Eraudière","La Vigne","44000","Nantes","0645743525","Axa","pierreaxel.noel@gmail.com","remarque", true);
 		Agenda agenda1 = new Agenda(1, cal, 1);
 		Animal animal1 = new Animal(1, "Diwan", "Male", "Marron", "Teckel", "Chiendelacasse", 1, "LeBGdu57", "VoldeVoiture",true);
 		Personnel pers1 = new Personnel("MorganLeBGDu44", "azertyui", "Sec", true);

@@ -23,11 +23,22 @@ public class Client {
 		
 	}
 	
-	public Client(int codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
+	public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal,
+			String ville, Boolean archive) {
+		super();
+		NomClient = nomClient;
+		PrenomClient = prenomClient;
+		Adresse1 = adresse1;
+		Adresse2 = adresse2;
+		CodePostal = codePostal;
+		Ville = ville;
+		Archive = archive;
+	}
+
+	public Client(String nomClient, String prenomClient, String adresse1, String adresse2,
 			String codePostal, String ville, String numTel, String assurance, String email, String remarque,
 			Boolean archive) {
 		super();
-		CodeClient = codeClient;
 		NomClient = nomClient;
 		PrenomClient = prenomClient;
 		Adresse1 = adresse1;

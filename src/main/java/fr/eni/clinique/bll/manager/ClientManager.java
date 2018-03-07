@@ -14,4 +14,6 @@ public interface ClientManager {
     void updateClient(Client client) throws ManagerException;
     
     void removeClient(Client client) throws ManagerException;
+
+    Client selectClient(String nom) throws ManagerException;
 }

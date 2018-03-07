@@ -89,12 +89,8 @@ private static ClientManagerImpl SINGLETON;
             ObjectUtil.checkNotBlank(client.getNomClient());
             ObjectUtil.checkNotBlank(client.getPrenomClient());
             ObjectUtil.checkNotBlank(client.getAdresse1());
-            ObjectUtil.checkNotNull(client.getAdresse2());
             ObjectUtil.checkNotNull(client.getCodePostal());
             ObjectUtil.checkNotNull(client.getVille());
-            ObjectUtil.checkNotNull(client.getNumTel());
-            ObjectUtil.checkNotNull(client.getAssurance());
-            ObjectUtil.checkNotNull(client.getEmail());
             ObjectUtil.checkNotNull(client.getArchive());
             
         } catch (IllegalArgumentException e) { // Business Erreur remontée à l'utilisateur
@@ -131,6 +127,20 @@ private static ClientManagerImpl SINGLETON;
 	public void updateClient(Client client) throws ManagerException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Client selectClient(String nom) throws ManagerException {
+		// TODO Auto-generated method stub
+        ObjectUtil.checkNotNull(nom);
+        Client leCli = null;
+        try {
+        	leCli = clientDao.selectByNom(nom);
+            
+        } catch (DaoException e) {
+            throw new ManagerException("Error select", e);
+        }
+        return leCli;
 	}
 
     /**
