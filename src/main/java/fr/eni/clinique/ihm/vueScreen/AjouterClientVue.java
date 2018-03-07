@@ -41,6 +41,12 @@ public class AjouterClientVue extends JFrame {
 		initialize();
 	}
 
+	public AjouterClientVue(ClientModel modelCli, RdvVue agendaVue) {
+		this.model = modelCli;
+		this.observable.addObserver(agendaVue);
+		initialize();
+	}
+
 	/**
 	 * Create the frame.
 	 */

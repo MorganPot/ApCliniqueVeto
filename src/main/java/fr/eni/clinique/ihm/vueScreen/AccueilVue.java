@@ -84,7 +84,7 @@ public class AccueilVue extends JFrame implements ActionListener {
 		mnAgenda.setActionCommand("agenda");
 		mnAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AgendaVue agendaVue = new AgendaVue();
+				RdvVue agendaVue = new RdvVue();
 				agendaVue.setVisible(true);
 				agendaVue.setResizable(false);
 				agendaVue.setLocationRelativeTo(null);

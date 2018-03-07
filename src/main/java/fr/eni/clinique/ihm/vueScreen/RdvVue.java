@@ -23,10 +23,14 @@ import org.jdatepicker.JDatePicker;
 
 import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.model.ClientModel;
 import fr.eni.clinique.ihm.model.PersonnelModel;
+import fr.eni.clinique.ihm.model.PersonnelModelDynamic;
 
+import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.Label;
@@ -35,16 +39,21 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-public class AgendaVue extends JFrame {
+public class RdvVue extends JFrame implements Observer{
 
 	private JPanel contentPane;
 	private List<Personnel> personnels = new ArrayList<Personnel>();
 	private List<Client> clients = new ArrayList<Client>();
+	private List<Animal> animaux = new ArrayList<Animal>();
 	private ManagerFactory factory = new ManagerFactory();
+	private ClientModel modelCli = new ClientModel();
+	private PersonnelModelDynamic modele = new PersonnelModelDynamic();
+	private JComboBox comboBoxClient;
 	
 	/**
 	 * Launch the application.
@@ -53,7 +62,7 @@ public class AgendaVue extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgendaVue frame = new AgendaVue();
+					RdvVue frame = new RdvVue();
 					frame.setVisible(true);
 					frame.setResizable(false);
 					frame.setLocationRelativeTo(null);
@@ -67,10 +76,11 @@ public class AgendaVue extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgendaVue() {
+	public RdvVue() {
 		try {
 			personnels = factory.personnelManager().getPersonnel();
 			clients = factory.clientManager().getClient();
+			animaux = factory.animalManager().getAnimal();
 		} catch (ManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,7 +104,7 @@ public class AgendaVue extends JFrame {
 		lblClient.setBounds(38, 34, 46, 14);
 		panel.add(lblClient);
 		
-		JComboBox comboBoxClient = new JComboBox();
+		comboBoxClient = new JComboBox();
 		for (Client cli : clients){
 			comboBoxClient.addItem(cli.getNomClient());
 		}
@@ -106,16 +116,28 @@ public class AgendaVue extends JFrame {
 		panel.add(lblAnimal);
 		
 		JComboBox comboBoxAnimal = new JComboBox();
+		for (Animal ani : animaux){
+			comboBoxAnimal.addItem(ani.getNomAnimal());
+		}
 		comboBoxAnimal.setBounds(38,98, 108, 20);
 		panel.add(comboBoxAnimal);
 		
 		JButton btnClient = new JButton("");
-		btnClient.setIcon(new ImageIcon(AgendaVue.class.getResource("/image/add-button.png")));
+		btnClient.setIcon(new ImageIcon(RdvVue.class.getResource("/image/add-button.png")));
 		btnClient.setBounds(181, 46, 23, 23);
+		btnClient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	AjouterClientVue ajoutClientVue = new AjouterClientVue(modelCli, RdvVue.this);
+            	ajoutClientVue.setVisible(true);
+            	ajoutClientVue.setResizable(false);
+            	ajoutClientVue.setLocationRelativeTo(null);
+            }
+        });
 		panel.add(btnClient);
 		
 		JButton buttonAnimal = new JButton("");
-		buttonAnimal.setIcon(new ImageIcon(AgendaVue.class.getResource("/image/add-button.png")));
+		buttonAnimal.setIcon(new ImageIcon(RdvVue.class.getResource("/image/add-button.png")));
 		buttonAnimal.setBounds(181, 97, 23, 23);
 		panel.add(buttonAnimal);
 		
@@ -126,13 +148,13 @@ public class AgendaVue extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblVeterinaire = new JLabel("V\u00E9t\u00E9rinaire");
+		JLabel lblVeterinaire = new JLabel("Veterinaire");
 		lblVeterinaire.setBounds(42, 34, 85, 14);
 		panel_1.add(lblVeterinaire);
 		JComboBox comboBox = new JComboBox();
 		for (Personnel perso : personnels){
 			   comboBox.addItem(perso.getNom());
-			}
+		}
 		comboBox.setBounds(42, 54, 143, 20);
 		panel_1.add(comboBox);
 		
@@ -201,4 +223,12 @@ public class AgendaVue extends JFrame {
 		gbc_comboBox_1.gridy = 3;
 		panel_2.add(cbxMinute, gbc_comboBox_1);
 	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		modele.refresh();
+		comboBoxClient.addItem(((Client) arg1).getNomClient());
+	}
+	
+
 }
