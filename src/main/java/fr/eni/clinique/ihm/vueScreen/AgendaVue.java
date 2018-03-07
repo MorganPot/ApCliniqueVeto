@@ -21,7 +21,11 @@ import javax.swing.border.TitledBorder;
 import org.jdatepicker.ComponentFormatDefaults;
 import org.jdatepicker.JDatePicker;
 
-
+import fr.eni.clinique.bll.exception.ManagerException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.model.PersonnelModel;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -29,6 +33,8 @@ import java.awt.Label;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -36,7 +42,10 @@ import javax.swing.ImageIcon;
 public class AgendaVue extends JFrame {
 
 	private JPanel contentPane;
-
+	private List<Personnel> personnels = new ArrayList<Personnel>();
+	private List<Client> clients = new ArrayList<Client>();
+	private ManagerFactory factory = new ManagerFactory();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +68,14 @@ public class AgendaVue extends JFrame {
 	 * Create the frame.
 	 */
 	public AgendaVue() {
+		try {
+			personnels = factory.personnelManager().getPersonnel();
+			clients = factory.clientManager().getClient();
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 739, 453);
 		contentPane = new JPanel();
@@ -78,6 +95,9 @@ public class AgendaVue extends JFrame {
 		panel.add(lblClient);
 		
 		JComboBox comboBoxClient = new JComboBox();
+		for (Client cli : clients){
+			comboBoxClient.addItem(cli.getNomClient());
+		}
 		comboBoxClient.setBounds(38, 49, 108, 20);
 		panel.add(comboBoxClient);
 		
@@ -86,7 +106,7 @@ public class AgendaVue extends JFrame {
 		panel.add(lblAnimal);
 		
 		JComboBox comboBoxAnimal = new JComboBox();
-		comboBoxAnimal.setBounds(38, 98, 108, 20);
+		comboBoxAnimal.setBounds(38,98, 108, 20);
 		panel.add(comboBoxAnimal);
 		
 		JButton btnClient = new JButton("");
@@ -109,10 +129,13 @@ public class AgendaVue extends JFrame {
 		JLabel lblVeterinaire = new JLabel("V\u00E9t\u00E9rinaire");
 		lblVeterinaire.setBounds(42, 34, 85, 14);
 		panel_1.add(lblVeterinaire);
-		
 		JComboBox comboBox = new JComboBox();
+		for (Personnel perso : personnels){
+			   comboBox.addItem(perso.getNom());
+			}
 		comboBox.setBounds(42, 54, 143, 20);
 		panel_1.add(comboBox);
+		
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setToolTipText("");

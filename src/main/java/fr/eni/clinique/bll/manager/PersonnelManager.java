@@ -40,4 +40,5 @@ public interface PersonnelManager {
      * @throws ManagerException
      */
     void removePersonnel(int codePers) throws ManagerException;
+
 }
