@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +15,10 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import fr.eni.clinique.bll.exception.ManagerException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.resources.Sexe;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -26,6 +31,8 @@ public class AnimalVue extends JFrame {
 	private JTextField textFieldNom;
 	private JTextField textFieldCouleur;
 	private JTextField textFieldTatouage;
+	private List<Client> clients = new ArrayList<Client>();
+	private ManagerFactory factory = new ManagerFactory();
 
 	/**
 	 * Launch the application.
@@ -36,6 +43,8 @@ public class AnimalVue extends JFrame {
 				try {
 					AnimalVue frame = new AnimalVue();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,6 +56,13 @@ public class AnimalVue extends JFrame {
 	 * Create the frame.
 	 */
 	public AnimalVue() {
+		try {
+			clients = factory.clientManager().getClient();
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 593, 464);
 		contentPane = new JPanel();
@@ -66,6 +82,12 @@ public class AnimalVue extends JFrame {
 		
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setBounds(441, 28, 89, 23);
+		btnAnnuler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
 		panel.add(btnAnnuler);
 		
 		JPanel panel_1 = new JPanel();
@@ -74,9 +96,12 @@ public class AnimalVue extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(22, 22, 482, 20);
-		panel_1.add(comboBox);
+		JComboBox comboBoxClient = new JComboBox();
+		comboBoxClient.setBounds(22, 22, 482, 20);
+		for (Client cli : clients){
+			comboBoxClient.addItem(cli.getNomClient());
+		}
+		panel_1.add(comboBoxClient);
 		
 		JLabel lblCode = new JLabel("Code");
 		lblCode.setBounds(47, 194, 46, 14);
@@ -131,7 +156,7 @@ public class AnimalVue extends JFrame {
 		comboBox_1.setBounds(298, 307, 86, 20);
 		contentPane.add(comboBox_1);
 		
-		JComboBox comboBoxSexe = new JComboBox();
+		JComboBox comboBoxSexe = new JComboBox(Sexe.values());
 		comboBoxSexe.setBounds(434, 227, 93, 20);
 		contentPane.add(comboBoxSexe);
 	}

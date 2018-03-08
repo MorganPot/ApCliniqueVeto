@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JButton;
 import java.awt.Button;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 
 
@@ -45,6 +46,9 @@ public class AccueilVue extends JFrame implements ActionListener {
 			}
 		});
 	}
+	private void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(AccueilVue.this, message);
+    }
 
 	/**
 	 * Create the frame.
@@ -81,6 +85,7 @@ public class AccueilVue extends JFrame implements ActionListener {
 		menuBar.add(mnGestionRDV);
 		
 		JMenuItem mnAgenda = new JMenuItem("Agenda");
+		menuBar.add(mnAgenda);
 		mnAgenda.setActionCommand("agenda");
 		mnAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -90,7 +95,6 @@ public class AccueilVue extends JFrame implements ActionListener {
 				agendaVue.setLocationRelativeTo(null);
 			}
 		});
-		menuBar.add(mnAgenda);
 		
 		JMenuItem menuItemGestionPersonnel = new JMenuItem("GestionPersonnel");
 		menuBar.add(menuItemGestionPersonnel);
@@ -108,6 +112,43 @@ public class AccueilVue extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnRdv = new JButton("Gestion rendez-vous");
+		btnRdv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RdvVue rdvvue = new RdvVue();
+				rdvvue.setVisible(true);
+				rdvvue.setResizable(false);
+				rdvvue.setLocationRelativeTo(null);
+			}
+		});
+		btnRdv.setBounds(32, 24, 167, 51);
+		contentPane.add(btnRdv);
+		
+		JButton btnAgenda = new JButton("Agenda");
+		btnAgenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showSuccessMessage("Pas fait");
+			}
+		});
+		btnAgenda.setBounds(32, 100, 167, 51);
+		contentPane.add(btnAgenda);
+		
+		JButton btnGestionPersonnel = new JButton("Gestion Personnel");
+		btnGestionPersonnel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PersonnelVue persoVue = new PersonnelVue();
+				persoVue.setResizable(false);
+				persoVue.setLocationRelativeTo(null);
+				persoVue.setVisible(true);
+			}
+		});
+		btnGestionPersonnel.setBounds(32, 178, 167, 51);
+		contentPane.add(btnGestionPersonnel);
+		
+		JButton button_2 = new JButton("New button");
+		button_2.setBounds(32, 259, 167, 51);
+		contentPane.add(button_2);
 		
 	}
 
