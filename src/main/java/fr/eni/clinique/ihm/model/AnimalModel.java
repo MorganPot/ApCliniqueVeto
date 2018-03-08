@@ -6,6 +6,7 @@ import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.manager.impl.AnimalManagerImpl;
 import fr.eni.clinique.bll.manager.impl.PersonnelManagerImpl;
 import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 
 public class AnimalModel {
@@ -28,8 +29,8 @@ public class AnimalModel {
 		animalM.updateAnimal(animal);
 	}
 	
-	public List<Animal> selectAll() throws ManagerException {
-		return animalM.getAnimal();
+	public List<Animal> selectAll(Client client) throws ManagerException {
+		return animalM.getAnimalClient(client);
 	}
 	
 }

@@ -264,6 +264,14 @@ public class GestionClientVue extends JFrame implements Observer{
 		leCliAffiche = client;
 	}
 	
+	public Client getClient(){
+		return leCliAffiche;
+	}
+	
+	public AnimalModelDynamic getModel(){
+		return model;
+	}
+	
 	@Override
 	public void update(Observable o, Object client) {
 

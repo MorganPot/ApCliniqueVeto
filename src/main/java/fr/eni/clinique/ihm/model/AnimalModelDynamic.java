@@ -8,8 +8,11 @@ import javax.swing.table.AbstractTableModel;
 import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.vueScreen.GestionClientVue;
 
 public class AnimalModelDynamic extends AbstractTableModel{
+	
 	private List<Animal> animaux = new ArrayList<Animal>();
 	private ManagerFactory factory = new ManagerFactory();
 	private AnimalModel model = new AnimalModel();
@@ -19,7 +22,6 @@ public class AnimalModelDynamic extends AbstractTableModel{
     public AnimalModelDynamic() {
         super();
 //			animaux = factory.animalManager().getAnimal();
-        	refresh();
     }
     
     @Override
@@ -59,9 +61,9 @@ public class AnimalModelDynamic extends AbstractTableModel{
 		 return animaux.size();
 	}
     
-    public void refresh() {
+    public void refresh(Client client) {
 		try {
-			animaux = model.selectAll();
+				animaux = model.selectAll(client);
 		} catch (ManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

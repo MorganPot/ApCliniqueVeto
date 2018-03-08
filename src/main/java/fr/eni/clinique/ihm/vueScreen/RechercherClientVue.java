@@ -94,6 +94,7 @@ public class RechercherClientVue extends JFrame {
 					
 					observable.changeData(model.selectClient(getClient().getNomClient()).get(0));
 					vue.clientAffiche(getClient());
+					vue.getModel().refresh(getClient());
 					dispose();
 				}
 			}
