@@ -47,7 +47,12 @@ public class RechercherModel extends AbstractTableModel{
         return entetes[columnIndex];
     }
     
+    public Client getValueAt(int rowIndex) {
+    	return clients.get(rowIndex);
+    }
+    
     public void refresh(List<Client> listeCli) {
+    	clients.clear();
     	for (Client cli : listeCli) {
     		clients.add(cli);
 		}

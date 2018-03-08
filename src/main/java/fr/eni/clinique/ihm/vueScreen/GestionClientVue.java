@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -40,7 +41,8 @@ public class GestionClientVue extends JFrame implements Observer{
 	private JTable table;
 	private AnimalModelDynamic model = new AnimalModelDynamic();
     private ClientModel modelCli = new ClientModel();
-
+    private Client leCliAffiche;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +64,11 @@ public class GestionClientVue extends JFrame implements Observer{
 	/**
 	 * Create the frame.
 	 */
+	
+    private void showFailureMessage(String message) {
+        JOptionPane.showMessageDialog(GestionClientVue.this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+    
 	public GestionClientVue() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 845, 487);
@@ -79,7 +86,7 @@ public class GestionClientVue extends JFrame implements Observer{
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				RechercherClientVue rechercherClientVue = new RechercherClientVue(modelCli);
+				RechercherClientVue rechercherClientVue = new RechercherClientVue(modelCli, GestionClientVue.this);
 				rechercherClientVue.setVisible(true);
 				rechercherClientVue.setResizable(false);
 				rechercherClientVue.setLocationRelativeTo(null);
@@ -109,6 +116,20 @@ public class GestionClientVue extends JFrame implements Observer{
 		JButton btnSuppimer = new JButton("Supprimer");
 		btnSuppimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(leCliAffiche == null){
+					showFailureMessage("Aucun client n'est affiché !");
+				}
+				else{
+					modelCli.updateClientArchive(leCliAffiche.getNomClient());
+					textFieldCode.setText("");
+					textFieldNom.setText("");
+					textFieldPrenom.setText("");
+					textFieldAdresse.setText("");
+					textFieldAdresse2.setText("");
+					textFieldCodePostal.setText("");
+					textFieldVille.setText("");
+					leCliAffiche = null;
+				}
 			}
 		});
 		btnSuppimer.setBounds(375, 21, 99, 23);
@@ -118,6 +139,19 @@ public class GestionClientVue extends JFrame implements Observer{
 		btnValider.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/tick.png")));
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(leCliAffiche == null){
+					showFailureMessage("Aucun client n'est affiché !");
+				}
+				else{
+					leCliAffiche.setNomClient(textFieldNom.getText());
+					leCliAffiche.setPrenomClient(textFieldPrenom.getText());
+					leCliAffiche.setAdresse1(textFieldAdresse.getText());
+					leCliAffiche.setAdresse2(textFieldAdresse2.getText());
+					leCliAffiche.setCodePostal(textFieldCodePostal.getText());
+					leCliAffiche.setVille(textFieldVille.getText());
+					textFieldCode.setText(Integer.toString(((Client) leCliAffiche).getCodeClient()));
+					modelCli.updateClient(leCliAffiche);
+				}
 			}
 		});
 		btnValider.setBounds(608, 11, 49, 44);
@@ -127,8 +161,19 @@ public class GestionClientVue extends JFrame implements Observer{
 		btnAnnuler.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/cancel.png")));
 		btnAnnuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
+
+				if(leCliAffiche == null){
+					showFailureMessage("Aucun client n'est affiché !");
+				}
+				else{
+					textFieldCode.setText(Integer.toString(((Client) leCliAffiche).getCodeClient()));
+					textFieldNom.setText(leCliAffiche.getNomClient());
+					textFieldPrenom.setText(leCliAffiche.getPrenomClient());
+					textFieldAdresse.setText(leCliAffiche.getAdresse1());
+					textFieldAdresse2.setText(leCliAffiche.getAdresse2());
+					textFieldCodePostal.setText(leCliAffiche.getCodePostal());
+					textFieldVille.setText(leCliAffiche.getVille());
+				}
 			}
 		});
 		btnAnnuler.setBounds(679, 11, 49, 44);
@@ -196,11 +241,8 @@ public class GestionClientVue extends JFrame implements Observer{
 		table = new JTable(model);
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 1));
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setBounds(0, 0, 500, 200);
-		JPanel panT = new JPanel();
-		panT.setBounds(320, 135, 500, 200);
-		panT.add(scroll);
-		contentPane.add(panT);
+		scroll.setBounds(325, 140, 470, 200);
+		contentPane.add(scroll);
 		
 		JButton btnAjouterAnimal = new JButton("");
 		btnAjouterAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/add-button.png")));
@@ -218,9 +260,15 @@ public class GestionClientVue extends JFrame implements Observer{
 		contentPane.add(btnEditerAnimal);
 	}
 	
+	public void clientAffiche(Client client){
+		leCliAffiche = client;
+	}
+	
 	@Override
 	public void update(Observable o, Object client) {
-		
+
+		String code = Integer.toString(((Client) client).getCodeClient());
+		textFieldCode.setText(code);
 		textFieldNom.setText(((Client) client).getNomClient());
 		textFieldPrenom.setText(((Client) client).getPrenomClient());
 		textFieldAdresse.setText(((Client) client).getAdresse1());

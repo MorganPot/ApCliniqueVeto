@@ -13,6 +13,8 @@ public interface ClientManager {
     
     void updateClient(Client client) throws ManagerException;
     
+    void updateClientArchive(String nomClient) throws ManagerException;
+    
     void removeClient(Client client) throws ManagerException;
 
     List<Client> selectClient(String nom) throws ManagerException;

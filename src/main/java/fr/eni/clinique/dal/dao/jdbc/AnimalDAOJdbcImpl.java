@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.common.util.ResourceUtil;
 import fr.eni.clinique.dal.dao.AnimalDao;
@@ -21,6 +22,9 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
     private final static String SELECT_ALL_QUERY = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, "
     												+ "Race, Espece, CodeClient, Tatouage, Antecedents, "
     												+ "Archive FROM Animaux;";
+    private final static String SELECT_ALL_QUERY_BY_CLIENT = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, "
+    												+ "Race, Espece, CodeClient, Tatouage, Antecedents, "
+													+ "Archive FROM Animaux WHERE CodeClient = ?;";
     private final static String SELECT_ONE_QUERY = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, "
 													+ "Race, Espece, CodeClient, Tatouage, Antecedents, "
 													+ "Archive FROM Animaux WHERE CodeAnimal = ?;";
@@ -192,6 +196,7 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
             ResourceUtil.safeClose(connection, statement);
         }
 	}
+	
    @Override
     public Animal selectById(Integer id) throws DaoException {
         
@@ -223,9 +228,35 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
         return animal;
     }
 
-@Override
-public void update(Integer id, String password) throws DaoException {
-	// TODO Auto-generated method stub
+	@Override
+	public void update(Integer id, String password) throws DaoException {
+		// TODO Auto-generated method stub
+		
+	}
 	
-}
+	@Override
+	public List<Animal> selectAll(Client client) throws DaoException {
+	    
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+	    
+	    List<Animal> animaux = new ArrayList<>();
+	    
+	    try {
+            connection = MSSQLConnectionFactory.get();
+            statement = connection.prepareStatement(SELECT_ALL_QUERY_BY_CLIENT);
+            
+            statement.setInt(1, client.getCodeClient());
+            
+            resultSet = statement.executeQuery();
+            	        
+	    } catch (SQLException e) {
+	        throw new DaoException("Erreur d'execution de la requete SELECT ALL Animal", e);
+	    } finally {
+	        ResourceUtil.safeClose(connection, statement, resultSet);
+	    }
+	    
+	    return animaux;
+	}
 }

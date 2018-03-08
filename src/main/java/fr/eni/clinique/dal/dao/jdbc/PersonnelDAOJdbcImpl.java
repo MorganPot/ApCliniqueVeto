@@ -19,13 +19,13 @@ import fr.eni.clinique.common.util.ObjectUtil;
 public class PersonnelDAOJdbcImpl implements PersonnelDao{
 	
     private final static String SELECT_ALL_QUERY = "SELECT CodePers, Nom, MotPasse, Role,"
-    												+ " Archive FROM Personnels";
+    												+ " Archive FROM Personnels WHERE Archive = 0";
     private final static String SELECT_ONE_QUERY = "SELECT CodePers, Nom, MotPasse, Role,"
 													+ " Archive FROM Personnels WHERE CodePers = ?";
     private final static String INSERT_QUERY = "INSERT INTO Personnels(Nom, MotPasse, Role, Archive) "
     											+ "VALUES (?, ?, ?, ?);";
     private final static String UPDATE_QUERY = "UPDATE Personnels SET MotPasse = ? WHERE CodePers = ?;";
-    private static final String DELETE_QUERY = "DELETE FROM Personnels WHERE CodePers=?";
+    private static final String DELETE_QUERY = "UPDATE Personnels SET Archive = ? WHERE CodePers=?";
     
     
     private static PersonnelDAOJdbcImpl SINGLETON = null;
@@ -158,7 +158,9 @@ public class PersonnelDAOJdbcImpl implements PersonnelDao{
             connection = MSSQLConnectionFactory.get();
             statement = connection.prepareStatement(DELETE_QUERY);
             
-            statement.setInt(1, id);
+
+            statement.setString(1, "1");
+            statement.setInt(2, id);
             statement.execute();
             
         } catch (SQLException e) {

@@ -32,4 +32,22 @@ public class ClientModel extends Observable	{
 		}
         return clients;
     }
+    
+    public void updateClientArchive(String nom) {
+        try {
+        	clientManager.updateClientArchive(nom);
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    public void updateClient(Client client) {
+        try {
+        	clientManager.updateClient(client);
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }

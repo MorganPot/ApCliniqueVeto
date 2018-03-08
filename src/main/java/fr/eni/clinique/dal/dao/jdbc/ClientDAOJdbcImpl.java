@@ -26,18 +26,19 @@ public class ClientDAOJdbcImpl implements ClientDao{
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive FROM Clients "
 													+ "WHERE CodeClient = ?;";
-    private final static String SELECT_ONE_QUERY_BY_NAME = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, "
+    private final static String SELECT_ALL_QUERY_BY_NAME = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive FROM Clients "
-													+ "WHERE NomClient LIKE ?;";
+													+ "WHERE NomClient LIKE ? AND Archive = 0;";
     private final static String INSERT_QUERY = "INSERT INTO Clients(NomClient, PrenomClient, Adresse1, "
 													+ "Adresse2, CodePostal, Ville, NumTel, Assurance, "
 													+ "Email, Remarque, Archive) "
 													+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private final static String UPDATE_QUERY = "UPDATE Clients SET NomClient = ?, PrenomClient = ?, Adresse1 = ?, "
-    												+ "Adresse2 = ?, CodePostal = ?, Ville = ?, NumTel = ?, "
-    												+ "Assurance = ?, Email = ?, Remarque = ?, Archive = ?"
-    												+ " WHERE CodeClient = ?;";
+												+ "Adresse2 = ?, CodePostal = ?, Ville = ? "
+												+ "WHERE CodeClient = ?;";
+    private final static String UPDATE_QUERY_ARCHIVE = "UPDATE Clients SET Archive = ?"
+    												+ " WHERE NomClient = ?;";
     private static final String DELETE_QUERY = "DELETE FROM Clients WHERE CodeClient = ?";
     
     
@@ -237,8 +238,32 @@ public class ClientDAOJdbcImpl implements ClientDao{
     }
 
 @Override
-public void update(Integer id, String password) throws DaoException {
-	// TODO Auto-generated method stub
+public void update(Client client) throws DaoException {
+	
+    ObjectUtil.checkNotNull(client);
+    
+    Connection connection = null;
+    PreparedStatement statement = null;
+    
+    try {
+        connection = MSSQLConnectionFactory.get();
+        statement = connection.prepareStatement(UPDATE_QUERY);
+        
+        statement.setString(1, client.getNomClient());
+        statement.setString(2, client.getPrenomClient());
+        statement.setString(3, client.getAdresse1());
+        statement.setString(4, client.getAdresse2());
+        statement.setString(5, client.getCodePostal());
+        statement.setString(6, client.getVille());
+        statement.setInt(7, client.getCodeClient());
+        
+        statement.executeUpdate();
+        
+    } catch (SQLException e) {
+        throw new DaoException("Erreur d'execution de la requete UPDATE Client", e);
+    } finally {
+        ResourceUtil.safeClose(connection, statement);
+    }
 	
 }
 
@@ -255,7 +280,7 @@ public List<Client> selectByNom(String nom) throws DaoException {
     String param = '%' + nom + '%';
     try {
         connection = MSSQLConnectionFactory.get();
-        statement = connection.prepareStatement(SELECT_ONE_QUERY_BY_NAME);
+        statement = connection.prepareStatement(SELECT_ALL_QUERY_BY_NAME);
         
         statement.setString(1, param);
         
@@ -271,5 +296,35 @@ public List<Client> selectByNom(String nom) throws DaoException {
         ResourceUtil.safeClose(connection, statement, resultSet);
     }
     return clients;
+}
+
+@Override
+public void updateArchive(String nom) throws DaoException {
+	
+    ObjectUtil.checkNotNull(nom);
+    
+    Connection connection = null;
+    PreparedStatement statement = null;
+    
+    try {
+        connection = MSSQLConnectionFactory.get();
+        statement = connection.prepareStatement(UPDATE_QUERY_ARCHIVE);
+        
+        statement.setString(1, "1");
+        statement.setString(2, nom);
+        
+        statement.executeUpdate();
+        
+    } catch (SQLException e) {
+        throw new DaoException("Erreur d'execution de la requete UPDATE Client archive", e);
+    } finally {
+        ResourceUtil.safeClose(connection, statement);
+    }
+}
+
+@Override
+public void update(Integer id, String password) throws DaoException {
+	// TODO Auto-generated method stub
+	
 }
 }

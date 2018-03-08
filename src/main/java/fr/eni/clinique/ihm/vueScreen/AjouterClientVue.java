@@ -87,7 +87,7 @@ public class AjouterClientVue extends JFrame {
 					model.addClient(client);
 //					vue.ajoutClient(client);
 					
-					observable.changeData(client);
+					observable.changeData(model.selectClient(client.getNomClient()).get(0));
 					dispose();
 				}
 			}

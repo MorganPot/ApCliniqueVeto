@@ -126,8 +126,26 @@ private static ClientManagerImpl SINGLETON;
 
 	@Override
 	public void updateClient(Client client) throws ManagerException {
-		// TODO Auto-generated method stub
-		
+		  ObjectUtil.checkNotNull(client);
+	        try {
+	            
+	            clientDao.update(client);
+	            
+	        } catch (DaoException e) {
+	            throw new ManagerException("Error updating", e);
+	        }
+	}
+	
+	@Override
+	public void updateClientArchive(String nomClient) throws ManagerException {
+		  ObjectUtil.checkNotNull(nomClient);
+	        try {
+	            
+	            clientDao.updateArchive(nomClient);
+	            
+	        } catch (DaoException e) {
+	            throw new ManagerException("Error updating", e);
+	        }
 	}
 
 	@Override

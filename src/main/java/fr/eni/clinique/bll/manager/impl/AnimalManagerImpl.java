@@ -108,5 +108,19 @@ private static AnimalManagerImpl SINGLETON;
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<Animal> getAnimalClient(Client client) throws ManagerException {
+        List<Animal> animaux = null;
+        
+        try {
+        	animaux = animalDao.selectAll(client);
+            
+        } catch (DaoException e) {
+            throw new ManagerException("Error getting Animaux", e);
+        }
+        
+        return animaux;
+	}
  
 }
