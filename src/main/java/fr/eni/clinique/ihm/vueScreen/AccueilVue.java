@@ -76,36 +76,6 @@ public class AccueilVue extends JFrame implements ActionListener {
 				}
 			});
 			mnNewMenuFichier.add(mnFermer);
-			
-		
-		
-		JMenu mnGestionRDV = new JMenu("Gestion rendez-vous");
-		mnGestionRDV.setActionCommand("gestionrdv");
-		mnGestionRDV.addActionListener(this);
-		menuBar.add(mnGestionRDV);
-		
-		JMenuItem mnAgenda = new JMenuItem("Agenda");
-		menuBar.add(mnAgenda);
-		mnAgenda.setActionCommand("agenda");
-		mnAgenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				RdvVue agendaVue = new RdvVue();
-				agendaVue.setVisible(true);
-				agendaVue.setResizable(false);
-				agendaVue.setLocationRelativeTo(null);
-			}
-		});
-		
-		JMenuItem menuItemGestionPersonnel = new JMenuItem("GestionPersonnel");
-		menuBar.add(menuItemGestionPersonnel);
-		menuItemGestionPersonnel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PersonnelVue personnelVue = new PersonnelVue();
-				personnelVue.setVisible(true);
-				personnelVue.setResizable(false);
-				personnelVue.setLocationRelativeTo(null);
-			}
-		});
 		
 		
 		contentPane = new JPanel();
@@ -122,7 +92,7 @@ public class AccueilVue extends JFrame implements ActionListener {
 				rdvvue.setLocationRelativeTo(null);
 			}
 		});
-		btnRdv.setBounds(32, 24, 167, 51);
+		btnRdv.setBounds(33, 25, 541, 51);
 		contentPane.add(btnRdv);
 		
 		JButton btnAgenda = new JButton("Agenda");
@@ -131,7 +101,7 @@ public class AccueilVue extends JFrame implements ActionListener {
 				showSuccessMessage("Pas fait");
 			}
 		});
-		btnAgenda.setBounds(32, 100, 167, 51);
+		btnAgenda.setBounds(33, 101, 541, 51);
 		contentPane.add(btnAgenda);
 		
 		JButton btnGestionPersonnel = new JButton("Gestion Personnel");
@@ -143,12 +113,20 @@ public class AccueilVue extends JFrame implements ActionListener {
 				persoVue.setVisible(true);
 			}
 		});
-		btnGestionPersonnel.setBounds(32, 178, 167, 51);
+		btnGestionPersonnel.setBounds(33, 179, 541, 51);
 		contentPane.add(btnGestionPersonnel);
 		
-		JButton button_2 = new JButton("New button");
-		button_2.setBounds(32, 259, 167, 51);
-		contentPane.add(button_2);
+		JButton btnClientGestion = new JButton("Gestion Client");
+		btnClientGestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GestionClientVue gestionClientVue = new GestionClientVue();
+				gestionClientVue.setVisible(true);
+				gestionClientVue.setResizable(false);
+				gestionClientVue.setLocationRelativeTo(null);
+			}
+		});
+		btnClientGestion.setBounds(33, 260, 541, 51);
+		contentPane.add(btnClientGestion);
 		
 	}
 

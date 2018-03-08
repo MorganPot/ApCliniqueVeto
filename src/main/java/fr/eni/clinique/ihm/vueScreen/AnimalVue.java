@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+//import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +19,11 @@ import javax.swing.border.TitledBorder;
 
 import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.ihm.model.AnimalModel;
+import fr.eni.clinique.ihm.model.PersonnelModel;
 import fr.eni.clinique.resources.Sexe;
 
 import javax.swing.JComboBox;
@@ -26,17 +32,36 @@ import javax.swing.JTextField;
 
 public class AnimalVue extends JFrame {
 
+	private static final long serialVersionUID = 5497743199791005308L;
+	/**
+	 * 
+	 */
 	private JPanel contentPane;
 	private JTextField textFieldCode;
 	private JTextField textFieldNom;
 	private JTextField textFieldCouleur;
 	private JTextField textFieldTatouage;
+	private AnimalModel model;
+	private JComboBox comboBoxEspece;
+	private JComboBox comboBoxSexe;
+	private JComboBox comboBoxRace;
+	private JComboBox comboBoxClient;
+	private JLabel lblErreur;
 	private List<Client> clients = new ArrayList<Client>();
+	private List<Race> races = new ArrayList<Race>();
 	private ManagerFactory factory = new ManagerFactory();
+	final Observer observable = new Observer();
 
 	/**
 	 * Launch the application.
 	 */
+	
+	public AnimalVue(AnimalModel model,GestionClientVue mafenetre) {
+		this.model = model;
+		this.observable.addObserver(mafenetre);
+	}
+	
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -78,6 +103,31 @@ public class AnimalVue extends JFrame {
 		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setBounds(331, 28, 89, 23);
+		btnValider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(textFieldNom.getText().length() == 0 || textFieldCouleur.getText().length() == 0
+		    || textFieldTatouage.getText().length() == 0)
+				{
+					lblErreur.setVisible(true);
+				}
+				else {
+					System.out.println(textFieldNom.getText()+ comboBoxSexe.getSelectedItem().toString()+""+ textFieldCouleur.getText()+""+comboBoxRace.getSelectedItem().toString()+""+ comboBoxEspece.getSelectedItem().toString()+""+((Animal) comboBoxClient.getSelectedItem()).getCodeClient()+""+textFieldTatouage.getText());
+					System.out.println("Toto");
+					Animal animal = new Animal(textFieldNom.getText(),comboBoxSexe.getSelectedItem().toString(), textFieldCouleur.getText(),comboBoxRace.getSelectedItem().toString(),comboBoxEspece.getSelectedItem().toString(),((Animal) comboBoxClient.getSelectedItem()).getCodeClient(),textFieldTatouage.getText());
+					
+					try {
+						model.addAnimal(animal);
+					} catch (ManagerException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+//					vue.ajoutClient(client);
+					
+					observable.changeData(animal);
+					dispose();
+				}
+			}
+		});
 		panel.add(btnValider);
 		
 		JButton btnAnnuler = new JButton("Annuler");
@@ -96,7 +146,12 @@ public class AnimalVue extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox comboBoxClient = new JComboBox();
+		lblErreur = new JLabel("Veuillez remplir les champs");
+		lblErreur.setBounds(150,20, 300, 23);
+		contentPane.add(lblErreur);
+		lblErreur.setVisible(false);
+		
+		comboBoxClient = new JComboBox();
 		comboBoxClient.setBounds(22, 22, 482, 20);
 		for (Client cli : clients){
 			comboBoxClient.addItem(cli.getNomClient());
@@ -144,19 +199,22 @@ public class AnimalVue extends JFrame {
 		contentPane.add(textFieldTatouage);
 		textFieldTatouage.setColumns(10);
 		
-		JComboBox comboBoxEspece = new JComboBox();
+		comboBoxEspece = new JComboBox();
 		comboBoxEspece.setBounds(103, 307, 86, 20);
+		for (Race race : races){
+			comboBoxEspece.addItem(race.getRace());
+		}
 		contentPane.add(comboBoxEspece);
 		
 		JLabel lblRace = new JLabel("Race");
 		lblRace.setBounds(259, 310, 46, 14);
 		contentPane.add(lblRace);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(298, 307, 86, 20);
-		contentPane.add(comboBox_1);
+		comboBoxRace = new JComboBox();
+		comboBoxRace.setBounds(298, 307, 86, 20);
+		contentPane.add(comboBoxRace);
 		
-		JComboBox comboBoxSexe = new JComboBox(Sexe.values());
+		comboBoxSexe = new JComboBox(Sexe.values());
 		comboBoxSexe.setBounds(434, 227, 93, 20);
 		contentPane.add(comboBoxSexe);
 	}

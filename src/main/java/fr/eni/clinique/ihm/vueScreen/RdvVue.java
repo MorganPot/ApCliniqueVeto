@@ -138,6 +138,17 @@ public class RdvVue extends JFrame implements Observer{
 		
 		JButton buttonAnimal = new JButton("");
 		buttonAnimal.setIcon(new ImageIcon(RdvVue.class.getResource("/image/add-button.png")));
+		buttonAnimal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AnimalVue animalVue = new AnimalVue();
+				animalVue.setResizable(false);
+				animalVue.setVisible(true);
+				animalVue.setLocationRelativeTo(null);
+				
+			}
+		});
 		buttonAnimal.setBounds(181, 97, 23, 23);
 		panel.add(buttonAnimal);
 		

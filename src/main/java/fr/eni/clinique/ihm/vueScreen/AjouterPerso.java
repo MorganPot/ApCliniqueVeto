@@ -29,7 +29,7 @@ public class AjouterPerso extends JFrame{
 	private JTextField textFieldNom;
 	private JPasswordField passwordField;
     private PersonnelModel model;
-	final Observer observable = new Observer();
+	private final Observer observable = new Observer();
 	
 	public AjouterPerso(PersonnelModel model,PersonnelVue mafenetre) {
 		this.model = model;

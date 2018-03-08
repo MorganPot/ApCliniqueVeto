@@ -27,6 +27,18 @@ public class Animal {
 		Archive = archive;
 	}
 	
+	public Animal(String nomAnimal, String sexe, String couleur, String race, String espece,
+			int codeClient, String tatouage) {
+		super();
+		NomAnimal = nomAnimal;
+		Sexe = sexe;
+		Couleur = couleur;
+		Race = race;
+		Espece = espece;
+		CodeClient = codeClient;
+		Tatouage = tatouage;
+	}
+	
 	public Animal() {
 		// TODO Auto-generated constructor stub
 	}
