@@ -280,7 +280,7 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
 	}
 	
 	@Override
-	public List<Animal> selectAll(Client client) throws DaoException {
+	public List<Animal> selectAllCli(Client client) throws DaoException {
 	    
 	    Connection connection = null;
 	    PreparedStatement statement = null;
@@ -295,7 +295,11 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
             statement.setInt(1, client.getCodeClient());
             
             resultSet = statement.executeQuery();
-            	        
+            	  
+            while(resultSet.next()) {
+            	animaux.add(createAnimal(resultSet));
+            }
+            
 	    } catch (SQLException e) {
 	        throw new DaoException("Erreur d'execution de la requete SELECT ALL Animal", e);
 	    } finally {

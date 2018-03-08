@@ -115,11 +115,11 @@ private static AnimalManagerImpl SINGLETON;
         List<Animal> animaux = null;
         
         try {
-        	animaux = animalDao.selectAll(client);
-            
-        } catch (DaoException e) {
-            throw new ManagerException("Error getting Animaux", e);
-        }
+			animaux = animalDao.selectAllCli(client);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         return animaux;
 	}
