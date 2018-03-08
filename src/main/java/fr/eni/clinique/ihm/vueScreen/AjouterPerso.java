@@ -41,6 +41,7 @@ public class AjouterPerso extends JFrame{
 		setBounds(100, 100, 407, 200);
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setResizable(false);
 		
 		JPanel panelButtons = new JPanel();
 		panelButtons.setBounds(0, 0, 401, 169);
