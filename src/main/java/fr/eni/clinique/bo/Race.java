@@ -10,6 +10,10 @@ public class Race {
 		Espece = espece;
 	}
 	
+	public Race() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getRace() {
 		return Race;
 	}

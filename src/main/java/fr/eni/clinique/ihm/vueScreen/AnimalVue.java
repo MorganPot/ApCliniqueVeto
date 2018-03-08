@@ -83,6 +83,7 @@ public class AnimalVue extends JFrame {
 	public AnimalVue() {
 		try {
 			clients = factory.clientManager().getClient();
+			races = factory.animalManager().getRace();
 		} catch (ManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -201,9 +202,6 @@ public class AnimalVue extends JFrame {
 		
 		comboBoxEspece = new JComboBox();
 		comboBoxEspece.setBounds(103, 307, 86, 20);
-		for (Race race : races){
-			comboBoxEspece.addItem(race.getRace());
-		}
 		contentPane.add(comboBoxEspece);
 		
 		JLabel lblRace = new JLabel("Race");
@@ -212,6 +210,9 @@ public class AnimalVue extends JFrame {
 		
 		comboBoxRace = new JComboBox();
 		comboBoxRace.setBounds(298, 307, 86, 20);
+		for (Race race : races){
+			comboBoxRace.addItem(race.getRace());
+		}
 		contentPane.add(comboBoxRace);
 		
 		comboBoxSexe = new JComboBox(Sexe.values());

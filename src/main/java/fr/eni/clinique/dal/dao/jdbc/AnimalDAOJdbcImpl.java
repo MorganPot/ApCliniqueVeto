@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Race;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.common.util.ResourceUtil;
 import fr.eni.clinique.dal.dao.AnimalDao;
@@ -37,6 +38,8 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
 												+ ", Antecedents = ?, Archive = ? WHERE CodeAnimal = ?;";
     private static final String DELETE_QUERY = "DELETE FROM Animaux WHERE CodeAnimal = ?";
     
+    private static final String SELECT_ALL_RACE_QUERY = "SELECT * FROM Races";
+    
     
     private static AnimalDAOJdbcImpl SINGLETON = null;
     
@@ -49,6 +52,48 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
             SINGLETON = new AnimalDAOJdbcImpl();
         }
         return SINGLETON;
+    }
+    
+    private Race createRace(ResultSet resultSet) throws SQLException {
+        
+    	Race race = new Race();
+    	race.setRace(resultSet.getString("Race"));
+    	race.setEspece(resultSet.getString("Espece"));
+ 
+        
+        return race;
+    }
+    
+    public List<Race> selectAllRace() throws DaoException {
+        
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+        List<Race> races = new ArrayList<>();
+        
+        try {
+            // 1- Recuperation d'une connection à la BDD
+            connection = MSSQLConnectionFactory.get();
+            
+            // 2- Creation d'un statement
+            statement = connection.createStatement();
+            
+            // 3 - Executer la requete SQL
+            resultSet = statement.executeQuery(SELECT_ALL_RACE_QUERY);
+            
+            // 4 - Recupération du resultat
+            while(resultSet.next()) {
+            	races.add(createRace(resultSet));
+            }
+            
+        } catch (SQLException e) {
+            throw new DaoException("Erreur d'execution de la requete SELECT ALL Race", e);
+        } finally {
+            ResourceUtil.safeClose(connection, statement, resultSet);
+        }
+        
+        return races;
     }
     
     public List<Animal> selectAll() throws DaoException {

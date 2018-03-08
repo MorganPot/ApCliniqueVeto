@@ -6,6 +6,7 @@ import fr.eni.clinique.bll.exception.ManagerException;
 import fr.eni.clinique.bll.manager.AnimalManager;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Race;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.dal.dao.AnimalDao;
@@ -121,6 +122,20 @@ private static AnimalManagerImpl SINGLETON;
         }
         
         return animaux;
+	}
+
+	@Override
+	public List<Race> getRace() throws ManagerException {
+		List<Race> races = null;
+        
+        try {
+        	races = animalDao.selectAllRace();
+            
+        } catch (DaoException e) {
+            throw new ManagerException("Error getting races", e);
+        }
+        
+        return races;
 	}
  
 }
