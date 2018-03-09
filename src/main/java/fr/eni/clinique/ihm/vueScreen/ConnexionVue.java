@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.dao.jdbc.ConnexionDAOJdbcImpl;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.listener.ConnexionActionListener;
@@ -48,7 +49,10 @@ public class ConnexionVue extends JFrame {
 	
     private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); // Font
     private Font defaultFont = new Font("Arial", Font.PLAIN, 14); // Other
-    	
+    
+    public ConnexionVue() {
+    }
+    
 	public ConnexionVue(String title) {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
@@ -145,12 +149,12 @@ public class ConnexionVue extends JFrame {
     private void verifLog() {
 
         try {
-            if (textField.getText().trim().equals("") || passwordField.getText().trim().equals("")) {
+            if (textField.getText().trim().equals("") || passwordField.getPassword().equals("")) {
                 // showArticle(model.lastArticle());
                 showFailureMessage("Login/Password incorrect !!");
             } else {
-                if(controller.verifLog(textField.getText().trim(), passwordField.getText().trim())){
-                	AccueilVue accueilVue = new AccueilVue();
+                if(controller.verifLog(textField.getText().trim(), String.valueOf(passwordField.getPassword()).trim())){
+                	AccueilVue accueilVue = new AccueilVue(this.getUtilCo());
                 	accueilVue.setVisible(true);
                 	accueilVue.setResizable(false);
                 	accueilVue.setLocationRelativeTo(null);
@@ -161,7 +165,7 @@ public class ConnexionVue extends JFrame {
                 // showArticle(model.currentArticle());
             }
         } catch (Exception e) {
-            showFailureMessage(e.getMessage());
+            showFailureMessage("Erreur");
         }
     }
 
@@ -203,5 +207,7 @@ public class ConnexionVue extends JFrame {
         this.actionListener = null;
     }
     
-    
+    public Personnel getUtilCo() {
+    	return controller.getPerso();
+    }
 }

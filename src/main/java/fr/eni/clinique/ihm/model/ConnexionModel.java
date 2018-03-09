@@ -14,6 +14,8 @@ public class ConnexionModel extends Observable{
     private List<Personnel> personnels = new ArrayList<>();
 
     private LoginManager loginManager = ManagerFactory.loginManager();
+    
+    private Personnel perso = null;
 	
     public Boolean verifLog(String nom, String motPasse) throws ManagerException {
     	
@@ -23,6 +25,7 @@ public class ConnexionModel extends Observable{
 	        
 			for (Personnel personnel : loginManager.getPerso()) {
 				if(personnel.getNom().equals(nom) && personnel.getMotPasse().equals(motPasse)){
+					perso = personnel;
 					result = true;
 				}
 			}
@@ -33,4 +36,9 @@ public class ConnexionModel extends Observable{
 		
 		return result;
 	} 
+    
+    public Personnel getPerso() {
+    	return perso;
+    }
+    
 }

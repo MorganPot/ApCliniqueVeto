@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import fr.eni.clinique.bll.exception.ManagerException;
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.model.ClientModel;
 import fr.eni.clinique.ihm.model.PersonnelModel;
 
@@ -28,24 +29,30 @@ public class AccueilVue extends JFrame implements ActionListener {
 	private GestionClientVue gestionClientVue;
 	private PersonnelModel ModelGestionPersonnel;
 	private ClientModel gestionClientsModel;
+	Personnel persoCo;
 
+    public AccueilVue(Personnel perso){
+    	persoCo = perso;
+    	initialize();
+    }
+    
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AccueilVue frame = new AccueilVue();
-					frame.setVisible(true);
-					frame.setResizable(false);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AccueilVue frame = new AccueilVue();
+//					frame.setVisible(true);
+//					frame.setResizable(false);
+//					frame.setLocationRelativeTo(null);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	private void showSuccessMessage(String message) {
         JOptionPane.showMessageDialog(AccueilVue.this, message);
     }
@@ -53,7 +60,7 @@ public class AccueilVue extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public AccueilVue() {
+	public void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 624, 423);
 		
@@ -82,52 +89,59 @@ public class AccueilVue extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		if(persoCo.getRole().equals("sec")){
+			JButton btnRdv = new JButton("Gestion rendez-vous");
+			btnRdv.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					RdvVue rdvvue = new RdvVue();
+					rdvvue.setVisible(true);
+					rdvvue.setResizable(false);
+					rdvvue.setLocationRelativeTo(null);
+				}
+			});
+			btnRdv.setBounds(33, 25, 541, 51);
+			contentPane.add(btnRdv);
+		}
 		
-		JButton btnRdv = new JButton("Gestion rendez-vous");
-		btnRdv.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				RdvVue rdvvue = new RdvVue();
-				rdvvue.setVisible(true);
-				rdvvue.setResizable(false);
-				rdvvue.setLocationRelativeTo(null);
-			}
-		});
-		btnRdv.setBounds(33, 25, 541, 51);
-		contentPane.add(btnRdv);
+		if(persoCo.getRole().equals("sec")){
+			JButton btnClientGestion = new JButton("Gestion Client");
+			btnClientGestion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GestionClientVue gestionClientVue = new GestionClientVue();
+					gestionClientVue.setVisible(true);
+					gestionClientVue.setResizable(false);
+					gestionClientVue.setLocationRelativeTo(null);
+				}
+			});
+			btnClientGestion.setBounds(33, 101, 541, 51);
+			contentPane.add(btnClientGestion);
+		}
 		
-		JButton btnAgenda = new JButton("Agenda");
-		btnAgenda.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showSuccessMessage("Pas fait");
-			}
-		});
-		btnAgenda.setBounds(33, 101, 541, 51);
-		contentPane.add(btnAgenda);
+		if(persoCo.getRole().equals("vet")){
+			JButton btnAgenda = new JButton("Agenda");
+			btnAgenda.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					showSuccessMessage("Pas fait");
+				}
+			});
+			btnAgenda.setBounds(33, 260, 541, 51);
+			contentPane.add(btnAgenda);
+		}
 		
-		JButton btnGestionPersonnel = new JButton("Gestion Personnel");
-		btnGestionPersonnel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PersonnelVue persoVue = new PersonnelVue();
-				persoVue.setResizable(false);
-				persoVue.setLocationRelativeTo(null);
-				persoVue.setVisible(true);
-			}
-		});
-		btnGestionPersonnel.setBounds(33, 179, 541, 51);
-		contentPane.add(btnGestionPersonnel);
-		
-		JButton btnClientGestion = new JButton("Gestion Client");
-		btnClientGestion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GestionClientVue gestionClientVue = new GestionClientVue();
-				gestionClientVue.setVisible(true);
-				gestionClientVue.setResizable(false);
-				gestionClientVue.setLocationRelativeTo(null);
-			}
-		});
-		btnClientGestion.setBounds(33, 260, 541, 51);
-		contentPane.add(btnClientGestion);
-		
+		if(persoCo.getRole().equals("adm")){
+			JButton btnGestionPersonnel = new JButton("Gestion Personnel");
+			btnGestionPersonnel.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PersonnelVue persoVue = new PersonnelVue();
+					persoVue.setResizable(false);
+					persoVue.setLocationRelativeTo(null);
+					persoVue.setVisible(true);
+				}
+			});
+			btnGestionPersonnel.setBounds(33, 179, 541, 51);
+			contentPane.add(btnGestionPersonnel);
+		}
 	}
 
 	@Override
