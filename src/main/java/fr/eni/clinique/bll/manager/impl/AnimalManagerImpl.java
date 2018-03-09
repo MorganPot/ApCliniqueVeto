@@ -137,5 +137,11 @@ private static AnimalManagerImpl SINGLETON;
         
         return races;
 	}
+
+	@Override
+	public List<Race> getEspece() throws ManagerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
  
 }

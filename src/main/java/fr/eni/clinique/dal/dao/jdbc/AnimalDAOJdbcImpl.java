@@ -40,6 +40,8 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
     
     private static final String SELECT_ALL_RACE_QUERY = "SELECT * FROM Races";
     
+    private static final String SELECT_ALL_ESPECE_QUERY = "SELECT Espece FROM Races";
+    
     
     private static AnimalDAOJdbcImpl SINGLETON = null;
     
@@ -62,6 +64,39 @@ public class AnimalDAOJdbcImpl implements AnimalDao{
  
         
         return race;
+    }
+    
+    
+    public List<Race> selectAllEspece() throws DaoException {
+        
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        
+        List<Race> especes = new ArrayList<>();
+        
+        try {
+            // 1- Recuperation d'une connection à la BDD
+            connection = MSSQLConnectionFactory.get();
+            
+            // 2- Creation d'un statement
+            statement = connection.createStatement();
+            
+            // 3 - Executer la requete SQL
+            resultSet = statement.executeQuery(SELECT_ALL_ESPECE_QUERY);
+            
+            // 4 - Recupération du resultat
+            while(resultSet.next()) {
+            	especes.add(createRace(resultSet));
+            }
+            
+        } catch (SQLException e) {
+            throw new DaoException("Erreur d'execution de la requete SELECT ALL espece", e);
+        } finally {
+            ResourceUtil.safeClose(connection, statement, resultSet);
+        }
+        
+        return especes;
     }
     
     public List<Race> selectAllRace() throws DaoException {

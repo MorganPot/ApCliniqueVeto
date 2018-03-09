@@ -10,6 +10,8 @@ import fr.eni.clinique.dal.exception.DaoException;
 public interface AnimalDao extends GenericDao<Animal, Integer>{
 	
 	List<Race> selectAllRace() throws DaoException;
+	
+	List<Race> selectAllEspece() throws DaoException;
 
 	List<Animal> selectAllCli(Client client) throws DaoException;
 }
