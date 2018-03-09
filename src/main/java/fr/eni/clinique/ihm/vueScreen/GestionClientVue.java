@@ -135,8 +135,7 @@ public class GestionClientVue extends JFrame implements Observer{
 		btnSuppimer.setBounds(375, 21, 99, 23);
 		panel.add(btnSuppimer);
 		
-		JButton btnValider = new JButton("");
-		btnValider.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/tick.png")));
+		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(leCliAffiche == null){
@@ -154,11 +153,10 @@ public class GestionClientVue extends JFrame implements Observer{
 				}
 			}
 		});
-		btnValider.setBounds(608, 11, 49, 44);
+		btnValider.setBounds(540, 21, 99, 23);
 		panel.add(btnValider);
 		
-		JButton btnAnnuler = new JButton("");
-		btnAnnuler.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/cancel.png")));
+		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -176,7 +174,7 @@ public class GestionClientVue extends JFrame implements Observer{
 				}
 			}
 		});
-		btnAnnuler.setBounds(679, 11, 49, 44);
+		btnAnnuler.setBounds(655, 21, 99, 23);
 		panel.add(btnAnnuler);
 		
 		JLabel lblCode = new JLabel("Code");
@@ -246,6 +244,14 @@ public class GestionClientVue extends JFrame implements Observer{
 		
 		JButton btnAjouterAnimal = new JButton("");
 		btnAjouterAnimal.setIcon(new ImageIcon(GestionClientVue.class.getResource("/image/add-button.png")));
+		btnAjouterAnimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AnimalVue animalVue = new AnimalVue();
+				animalVue.setVisible(true);
+				animalVue.setResizable(false);
+				animalVue.setLocationRelativeTo(null);
+			}
+		});
 		btnAjouterAnimal.setBounds(494, 384, 23, 23);
 		contentPane.add(btnAjouterAnimal);
 		
