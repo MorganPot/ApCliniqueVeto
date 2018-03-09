@@ -122,7 +122,12 @@ public class AccueilVue extends JFrame implements ActionListener {
 			JButton btnAgenda = new JButton("Agenda");
 			btnAgenda.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					showSuccessMessage("Pas fait");
+					AgendaVue agenda = new AgendaVue();
+					agenda.setVisible(true);
+					agenda.setResizable(false);
+					agenda.setLocationRelativeTo(null);
+					
+					showSuccessMessage("En cours");
 				}
 			});
 			btnAgenda.setBounds(33, 260, 541, 51);
