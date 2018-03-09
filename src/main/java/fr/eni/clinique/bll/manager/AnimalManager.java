@@ -15,6 +15,8 @@ public interface AnimalManager {
     
     List<Race> getRace() throws ManagerException;
     
+    List<Race> getEspece() throws ManagerException;
+    
     List<Animal> getAnimalClient(Client client) throws ManagerException;
     
     Animal addAnimal(Animal newAnimal) throws ManagerException;

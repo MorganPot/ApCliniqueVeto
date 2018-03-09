@@ -49,6 +49,7 @@ public class AnimalVue extends JFrame {
 	private JLabel lblErreur;
 	private List<Client> clients = new ArrayList<Client>();
 	private List<Race> races = new ArrayList<Race>();
+	private List<Race> especes = new ArrayList<Race>();
 	private ManagerFactory factory = new ManagerFactory();
 	final Observer observable = new Observer();
 
@@ -84,6 +85,7 @@ public class AnimalVue extends JFrame {
 		try {
 			clients = factory.clientManager().getClient();
 			races = factory.animalManager().getRace();
+			especes = factory.animalManager().getEspece();
 		} catch (ManagerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -202,6 +204,9 @@ public class AnimalVue extends JFrame {
 		
 		comboBoxEspece = new JComboBox();
 		comboBoxEspece.setBounds(103, 307, 86, 20);
+		for (Race espece : especes){
+			comboBoxEspece.addItem(espece.getEspece());
+		}
 		contentPane.add(comboBoxEspece);
 		
 		JLabel lblRace = new JLabel("Race");
